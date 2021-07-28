@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.label{
+    -fx-font-family: 'Press Start 2P', cursive;
+}
+
+#menuScreen{
+    -fx-background-color: grey;
+}
+.menuButton:hover{
+    -fx-text-fill: red;
+    -fx-scale-y: 2;
+    -fx-scale-x: 2;
+}
+
+.menuButton:pressed{
+    -fx-text-fill: blue;
+    -fx-scale-x: 1.75;
+    -fx-scale-y: 1.75;
+}

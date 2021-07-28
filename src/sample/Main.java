@@ -1,39 +1,38 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class Main extends Application {
 
-    VBox root = new VBox();
-    public Scene scene = new Scene(root, Color.RED);
+    public static Game game;
+    public static Image flag = new Image("File:D:\\Pictures\\MonkaS.gif", true);
+    public static Image mine = new Image("File:D:\\Pictures\\jebaited.png", true);
 
     public static void main(String[] args) {
         launch(args);
     }
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        final int numOfRows = 25, numOfColumns = 20;
-        primaryStage.setResizable(true);
-        primaryStage.setWidth(numOfColumns * 20 + numOfColumns - 4);
-        primaryStage.setHeight(numOfRows * 20 + numOfRows + 14);
+        Parent menu = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml")));
+        Scene menuScene = new Scene(menu);
+        String css = this.getClass().getResource("style.css").toExternalForm();
+        menuScene.getStylesheets().add(css);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Minesweeper");
-        primaryStage.setScene(scene);
+        game = new Game(5, 35, 20);
+        primaryStage.setScene(menuScene);
 //        primaryStage.setResizable(false);
-
-        primaryStage.show();
-//        root.getChildren().add(GameBar.settings);
-
+        primaryStage.sizeToScene();
         primaryStage.show();
 
     }
 }
 //TODO: game options menu
-
-
