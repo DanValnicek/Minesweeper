@@ -49,6 +49,10 @@ public class Square {
 
             } else if (!rectangle.getFill().equals(Color.gray(0.4))) {
                 this.rectangle.setFill(Color.gray(0.4));
+                Main.game.emptySquares--;
+                if (Main.game.emptySquares == 0){
+                    Main.game.timeline.stop();
+                }
                 if (value != 0) {
                     Main.game.getGridPane().add(this.tileLabel, x, y);
                 }

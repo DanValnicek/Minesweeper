@@ -54,7 +54,6 @@ public class MapGenerator {
             for (int x = -1; x < 2; x++) {//Position in row
                 if (i + y >= 0 && i + y < numOfRows && j + x >= 0 && j + x < numOfColumns && map[i + y][j + x] != 9) {
                     map[i + y][j + x]++;
-
                 }
             }
         }

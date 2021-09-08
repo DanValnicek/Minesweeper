@@ -27,7 +27,7 @@ public class Main extends Application {
         menuScene.getStylesheets().add(css);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Minesweeper");
-        game = new Game(5, 35, 20);
+        game = new Game(50, 40, 50);
         primaryStage.setScene(menuScene);
 //        primaryStage.setResizable(false);
         primaryStage.sizeToScene();

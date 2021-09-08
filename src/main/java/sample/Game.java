@@ -13,6 +13,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class Game {
+    static VBox root = new VBox();
+    static Scene scene = new Scene(root);
     final int numOfMines;
     final int numOfRows;
     final int numOfColumns;
@@ -25,10 +27,12 @@ public class Game {
     int[] minePositions;
     Stage stage;
     Square[][] squares;
-    static VBox root = new VBox();
-    static Scene scene = new Scene(root);
+    int emptySquares;
+
+
     public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
+        emptySquares = numOfColumns * numOfRows - numOfMines;
         this.numOfMines = numOfMines;
         this.numOfRows = numOfRows;
         this.numOfColumns = numOfColumns;

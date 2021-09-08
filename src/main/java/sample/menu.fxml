@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="menuScreen" prefHeight="268.0" prefWidth="569.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
+<AnchorPane fx:id="menuScreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
     <!--   <columnConstraints>-->
     <!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
     <!--   </columnConstraints>-->
@@ -14,7 +17,30 @@
     <!--      <RowConstraints maxHeight="200.0" minHeight="125.0" prefHeight="125.0" />-->
     <!--   </rowConstraints>-->
     <children>
-        <Label layoutX="12.0" layoutY="238.0" prefHeight="30.0" prefWidth="289.0" text="Created by Dan Valníček" />
+      <Rectangle height="268.0" stroke="#b5a7a700" strokeType="INSIDE" width="569.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.20952380952380953" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5363984674329502">
+                     <color>
+                        <Color red="0.7229166626930237" green="0.75" blue="0.7083333134651184" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+        <Label contentDisplay="RIGHT" layoutX="283.0" layoutY="251.0" prefHeight="0.0" prefWidth="276.0" text="Created by Dan Valníček" />
         <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="569.0">
             <children>
                 <Label id="title" fx:id="gameHeading" contentDisplay="CENTER" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
@@ -48,14 +74,43 @@
                             </stops>
                         </LinearGradient>
                     </textFill>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
                 </Label>
                 <Label fx:id="playButton" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play">
                     <font>
                         <Font size="18.0" />
                     </font>
                     <padding>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" top="10.0" />
                     </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
                 </Label>
                 <Label styleClass="menuButton" text="How to play">
                     <font>
@@ -64,6 +119,19 @@
                     <padding>
                         <Insets bottom="5.0" top="5.0" />
                     </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
                 </Label>
                 <Label styleClass="menuButton" text="Settings">
                     <font>
@@ -72,6 +140,19 @@
                     <padding>
                         <Insets bottom="5.0" top="5.0" />
                     </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
                 </Label>
                 <Label styleClass="menuButton" text="Account">
                     <font>
@@ -80,9 +161,25 @@
                     <padding>
                         <Insets bottom="5.0" top="5.0" />
                     </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
                 </Label>
 
             </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
         </VBox>
     </children>
 </AnchorPane>

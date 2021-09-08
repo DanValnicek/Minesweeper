@@ -4,9 +4,6 @@
     -fx-font-family: 'Press Start 2P', cursive;
 }
 
-#menuScreen{
-    -fx-background-color: grey;
-}
 .menuButton:hover{
     -fx-text-fill: red;
     -fx-scale-y: 2;
