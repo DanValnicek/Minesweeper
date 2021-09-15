@@ -30,6 +30,8 @@ public class Game {
     int emptySquares;
 
 
+
+
     public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
         emptySquares = numOfColumns * numOfRows - numOfMines;

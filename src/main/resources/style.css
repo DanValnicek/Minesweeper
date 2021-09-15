@@ -5,13 +5,13 @@
 }
 
 .menuButton:hover{
-    -fx-text-fill: red;
+    -fx-text-fill: #a00;
     -fx-scale-y: 2;
     -fx-scale-x: 2;
 }
 
 .menuButton:pressed{
-    -fx-text-fill: blue;
+    -fx-text-fill: #f33;
     -fx-scale-x: 1.75;
     -fx-scale-y: 1.75;
 }

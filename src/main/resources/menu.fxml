@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="menuScreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
+<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
     <!--   <columnConstraints>-->
     <!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
     <!--   </columnConstraints>-->
@@ -17,42 +17,38 @@
     <!--      <RowConstraints maxHeight="200.0" minHeight="125.0" prefHeight="125.0" />-->
     <!--   </rowConstraints>-->
     <children>
-      <Rectangle height="268.0" stroke="#b5a7a700" strokeType="INSIDE" width="569.0">
+      <Circle fx:id="background" centerX="262.0" centerY="134.0" radius="318.0" smooth="false" stroke="#8c000000">
          <fill>
-            <LinearGradient endX="1.0" endY="0.20952380952380953" startY="1.0">
+            <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
                <stops>
                   <Stop>
                      <color>
-                        <Color />
+                        <Color red="0.3333333432674408" green="0.3333333432674408" blue="0.3333333432674408" />
                      </color>
                   </Stop>
-                  <Stop offset="0.5363984674329502">
+                  <Stop offset="0.5031401824860765">
                      <color>
-                        <Color red="0.7229166626930237" green="0.75" blue="0.7083333134651184" />
+                        <Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color />
+                        <Color red="0.33000001311302185" green="0.33000001311302185" blue="0.33000001311302185" />
                      </color>
                   </Stop>
                </stops>
             </LinearGradient>
          </fill>
-      </Rectangle>
-        <Label contentDisplay="RIGHT" layoutX="283.0" layoutY="251.0" prefHeight="0.0" prefWidth="276.0" text="Created by Dan Valníček" />
-        <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="569.0">
+      </Circle>
+        <VBox alignment="CENTER" layoutX="5.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="525.0">
             <children>
-                <Label id="title" fx:id="gameHeading" contentDisplay="CENTER" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
+                <Label id="title" fx:id="gameHeading" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="264.0" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
                     <font>
                         <Font size="24.0" />
                     </font>
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
-                    <padding>
-                        <Insets bottom="10.0" top="30.0" />
-                    </padding>
                     <textFill>
                         <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
                             <stops>
@@ -63,12 +59,12 @@
                                 </Stop>
                                 <Stop offset="0.007662835249042145">
                                     <color>
-                                        <Color />
+                                        <Color red="0.4868420958518982" green="0.04733186960220337" blue="0.04733186960220337" />
                                     </color>
                                 </Stop>
                                 <Stop offset="1.0">
                                     <color>
-                                        <Color red="1.0" green="0.22152778506278992" blue="0.1805555522441864" />
+                                        <Color red="1.0" />
                                     </color>
                                 </Stop>
                             </stops>
@@ -88,7 +84,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="playButton" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play">
+                <Label fx:id="playButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -109,10 +105,10 @@
                   </Lighting>
                </effect>
                <VBox.margin>
-                  <Insets top="25.0" />
+                  <Insets />
                </VBox.margin>
                 </Label>
-                <Label styleClass="menuButton" text="How to play">
+                <Label fx:id="howToPlayButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="How to play" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -133,7 +129,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label styleClass="menuButton" text="Settings">
+                <Label fx:id="settingsButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Settings" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -154,7 +150,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label styleClass="menuButton" text="Account">
+                <Label fx:id="accountButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>

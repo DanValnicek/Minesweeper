@@ -22,7 +22,8 @@ public class Client {
     }
 
     public static void main(String[] args) throws Exception {
-        new Client("127.0.0.1", 56850).run();
+//        new Client("127.0.0.1", 56850).run();
+        new Client("165.22.76.230", 56850).run();
         //server 165.22.76.230
     }
 
