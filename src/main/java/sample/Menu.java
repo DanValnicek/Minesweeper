@@ -5,12 +5,10 @@ import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -18,17 +16,19 @@ import java.util.Objects;
 
 public class Menu {
 	static Scene menuScene;
-	static Game game;
+
 
 	public static void init() throws IOException {
 		menuScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/menu.fxml"))));
-		menuScene.getStylesheets().add(Objects.requireNonNull(Menu.class.getResource("/style.css")).toExternalForm());
-		rotateBackground(menuScene);
+		sceneInit(menuScene);
+	}
+
+	static void sceneInit(Scene scene) {
+		scene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
+		rotateBackground(scene);
 		Main.getFirstStage().setResizable(false);
 		Main.getFirstStage().setTitle("Minesweeper");
-		Main.getFirstStage().setScene(menuScene);
-		Main.getFirstStage().sizeToScene();
-		Main.getFirstStage().show();
+		Main.getFirstStage().setScene(scene);
 	}
 
 	public static void rotateBackground(Scene scene) {
@@ -46,9 +46,10 @@ public class Menu {
 		try {
 			switch (((Control) event.getSource()).getId()) {
 				case "playButton":
-					game = new Game(100, 30, 30);
-					Stage gameWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-					gameWindow.setScene(Game.getScene());
+					GameSettings.init();
+//					game = new Game(100, 30, 30);
+//					Stage gameWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//					gameWindow.setScene(Game.getScene());
 					break;
 				case "accountButton":
 					accountTab.init();

@@ -26,11 +26,7 @@ public class accountTab {
 		@FXML
 	public static void init() throws IOException {
 		accountScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/accountTab.fxml"))));
-		accountScene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
-		rotateBackground(accountScene);
-		Main.getFirstStage().setResizable(false);
-		Main.getFirstStage().setTitle("Minesweeper");
-		Main.getFirstStage().setScene(accountScene);
+		Menu.sceneInit(accountScene);
 		loginBox = (VBox) accountScene.lookup("#loginBox");
 		registerBox  = (VBox) accountScene.lookup("#registerBox");
 	}

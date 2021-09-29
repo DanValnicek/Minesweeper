@@ -17,7 +17,7 @@
     <!--      <RowConstraints maxHeight="200.0" minHeight="125.0" prefHeight="125.0" />-->
     <!--   </rowConstraints>-->
     <children>
-      <Circle fx:id="background" centerX="262.0" centerY="134.0" radius="318.0" smooth="false" stroke="#8c000000">
+      <Circle fx:id="background" cache="true" centerX="262.0" centerY="134.0" radius="318.0" smooth="false" stroke="#8c000000">
          <fill>
             <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
                <stops>
@@ -40,9 +40,9 @@
             </LinearGradient>
          </fill>
       </Circle>
-        <VBox alignment="CENTER" layoutX="5.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="525.0">
+        <VBox alignment="CENTER" cache="true" layoutX="5.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="525.0">
             <children>
-                <Label id="title" fx:id="gameHeading" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="264.0" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
+                <Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="430.0" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
                     <font>
                         <Font size="24.0" />
                     </font>

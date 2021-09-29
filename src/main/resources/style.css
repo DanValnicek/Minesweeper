@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&family=Ubuntu+Condensed&display=swap');
 
-.label{
-    -fx-font-family: 'Press Start 2P', cursive;
+ .label{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-weight: bold;
+}
+.menuButton,#title{
+    -fx-font-family: 'Press Start 2P';
+}
+.toggle-button, .button{
+    -fx-font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .menuButton:hover{
@@ -14,4 +22,8 @@
     -fx-text-fill: #f33;
     -fx-scale-x: 1.75;
     -fx-scale-y: 1.75;
+}
+
+.split-pane:vertical > .split-pane-divider {
+    -fx-background-color: transparent;
 }
