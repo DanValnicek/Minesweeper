@@ -6,15 +6,15 @@ import java.util.Random;
 public class MapGenerator {
 
 	public static int[] randMinesGen(int cells, int numOfMines, int forbidden, int rowWidth) {
+		System.out.println("forbidden:"+forbidden);
 		Random random = new Random();
 		int[] mines = new int[numOfMines];
 		loop:
 		for (int i = 0; i < numOfMines; i++) {
 			mines[i] = random.nextInt(cells);
 			for (int y = -1; y < 2; y++) {//Position in column
-//				if (i + y < 0 || i + y >= numOfRows) continue;
+				if (forbidden + rowWidth * y < 0) continue;
 				for (int x = -1; x < 2; x++) {//Position in row
-//			forbidden - rowWidth - 1 k <= forbidden - rowWidth + 2; k++) {
 					if ((forbidden + rowWidth * y + x) == mines[i]) {
 						i--;
 						continue loop;

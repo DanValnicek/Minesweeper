@@ -97,8 +97,10 @@ public class Square {
 					if (event.getButton() == MouseButton.PRIMARY) {
 						if (game.startTime == 0 && value == 0) {
 							game.startGame();
-						} else {
+						} else if(game.startTime == 0) {
+							System.out.println("x:"+x+"y:"+y);
 							game.reGenerateSquares(x, y);
+							game.startGame();
 						}
 
 						if (!popped && !marked) {

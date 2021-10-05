@@ -20,11 +20,11 @@ public class Game {
 	public GridPane gridPane;
 	int numOfMarked;
 	int[][] map;
-	Timeline timeline;
+	static Timeline timeline;
 	GameBar gameBar;
 	long startTime;
 	int[] minePositions;
-	Square[][] squares;
+	static Square[][] squares;
 	int emptySquares;
 
 	public VBox getRoot() {
@@ -73,7 +73,7 @@ public class Game {
 	}
 
 	public void reGenerateSquares(int forbiddenX, int forbiddenY) {
-		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX + 1), numOfColumns);
+		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX ), numOfColumns);
 		map = MapGenerator.MapGen(numOfRows, numOfColumns, minePositions);
 		for (int y = 0; y < numOfRows; y++) {
 			for (int x = 0; x < numOfColumns; x++) {
@@ -104,7 +104,7 @@ public class Game {
 		GameBar.mineCount.setText(Integer.toString(numOfMines - numOfMarked));
 	}
 
-	public void gameOver() {
+	public static void gameOver() {
 		timeline.stop();
 		squares = null;
 		System.gc();

@@ -11,7 +11,7 @@ import java.io.IOException;
 import static sample.GameSettings.game;
 
 public class GameBar {
-	public static Label timer = new Label();
+	public Label timer = new Label();
 	static Label mineCount = new Label();
 	AnchorPane anchorPane = new AnchorPane();
 
@@ -21,6 +21,7 @@ public class GameBar {
 		reset.setTextFill(Color.RED);
 		reset.setOnMouseClicked(mouseEvent -> {
 			try {
+				Game.gameOver();
 				GameSettings.newGame();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -47,7 +48,7 @@ public class GameBar {
 
 	//TODO: finish gamebar
 
-	public static void setTimer(long currentTime) {
+	public void setTimer(long currentTime) {
 		timer.setText(currentTime / 60 + ":" + currentTime % 60);
 	}
 
