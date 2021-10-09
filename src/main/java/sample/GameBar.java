@@ -2,33 +2,33 @@ package sample;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
 
-import static sample.GameSettings.game;
-
 public class GameBar {
-	public Label timer = new Label();
 	static Label mineCount = new Label();
+	public Label timer = new Label();
 	AnchorPane anchorPane = new AnchorPane();
 
-	public GameBar( int bombCount) {
+	public GameBar(int bombCount) {
 		Label reset = new Label("Reset");
 		reset.setFont(Font.font("Impact", 15));
 		reset.setTextFill(Color.RED);
 		reset.setOnMouseClicked(mouseEvent -> {
 			try {
-				Game.gameOver();
-				GameSettings.newGame();
+				Game.restart();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
-        anchorPane.setTopAnchor(reset,5.0);
-        anchorPane.setRightAnchor(reset, 40.0);
+		anchorPane.setTopAnchor(reset, 5.0);
+		anchorPane.setRightAnchor(reset, 40.0);
 		BackgroundFill backgroundFill = new BackgroundFill(Color.gray(0.2), CornerRadii.EMPTY, Insets.EMPTY);
 		Background background = new Background(backgroundFill);
 		anchorPane.setBackground(background);
@@ -43,7 +43,7 @@ public class GameBar {
 		anchorPane.setRightAnchor(timer, 5.0);
 		anchorPane.setTopAnchor(timer, 5.0);
 		anchorPane.setBottomAnchor(timer, 3.0);
-		anchorPane.getChildren().addAll(mineCount, timer,reset);
+		anchorPane.getChildren().addAll(mineCount, timer, reset);
 	}
 
 	//TODO: finish gamebar

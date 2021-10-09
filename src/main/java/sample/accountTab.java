@@ -14,21 +14,19 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.Objects;
 
-import static sample.Menu.rotateBackground;
-
 public class accountTab {
 	private static Scene accountScene;
 	@FXML
-	private static VBox loginBox;
+	private VBox loginBox;
 	@FXML
-	private static VBox registerBox;
+	private VBox registerBox;
 
-		@FXML
+	@FXML
 	public static void init() throws IOException {
 		accountScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/accountTab.fxml"))));
 		Menu.sceneInit(accountScene);
-		loginBox = (VBox) accountScene.lookup("#loginBox");
-		registerBox  = (VBox) accountScene.lookup("#registerBox");
+//		loginBox = (VBox) accountScene.lookup("#loginBox");
+//		registerBox = (VBox) accountScene.lookup("#registerBox");
 	}
 
 	@FXML

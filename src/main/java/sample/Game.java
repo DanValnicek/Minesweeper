@@ -14,9 +14,9 @@ import java.io.IOException;
 public class Game {
 	VBox root = new VBox();
 	Scene scene = new Scene(root);
-	int numOfMines;
-	int numOfRows;
-	int numOfColumns;
+	static int numOfMines;
+	static int numOfRows;
+	static int numOfColumns;
 	public GridPane gridPane;
 	int numOfMarked;
 	int[][] map;
@@ -108,6 +108,11 @@ public class Game {
 		timeline.stop();
 		squares = null;
 		System.gc();
+	}
+	public static void restart() throws IOException {
+		gameOver();
+
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
 	}
 }
 

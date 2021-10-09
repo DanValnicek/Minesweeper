@@ -14,27 +14,75 @@ import java.util.Objects;
 
 public class GameSettings {
 	static Game game;
-	private static Scene gameSettingsScene;
-	private static Spinner customMinesPercentage;
+	@FXML
+	private static Spinner<Double> percentOfMines;
 	@FXML
 	private ToggleGroup difficulty;
+	@FXML
+	private ToggleGroup size;
+	@FXML
+	private Spinner<Integer> width;
+	@FXML
+	private Spinner<Integer> height;
+	@FXML
+	private Spinner<Integer> mineCount;
 
-	public static void init() throws IOException {
-		gameSettingsScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettings.fxml"))));
-		Menu.sceneInit(gameSettingsScene);
-		customMinesPercentage = (Spinner) gameSettingsScene.lookup("percentOfMines");
-//customMinesPercentage.getValueFactory().setValue();
+	public GameSettings(int width, int height, int mineCount) throws IOException {
+
+
+		this.width.getValueFactory().setValue(width);
+		this.height.getValueFactory().setValue(height);
+		this.mineCount.getValueFactory().setValue(mineCount);
+		percentOfMines.getValueFactory().setValue(55.0);
+
 	}
 
-	public static void newGame() throws IOException {
-		game = new Game(100, 30, 30);
+	public static void init() throws IOException {
+	}
 
+	public static void newGame(int mineCount, int width, int height) throws IOException {
+		game = new Game(mineCount, height, width);
 	}
 
 	@FXML
-	private void selectDifficulty() {
+	private void selectDifficulty() throws Exception {
 		ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
-		System.out.println(selectedButton.getText());
+		System.out.println(selectedButton.getId());
+		switch (selectedButton.getId()) {
+			case "easyDiff":
+				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
+				break;
+			case "mediumDiff":
+				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.50));
+				break;
+			case "hardDiff":
+				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
+				break;
+			case "custom":
+				System.out.println(percentOfMines.getValue());
+				break;
+
+		}
+	}
+
+	@FXML
+	private void selectSize() throws Exception {
+		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
+		System.out.println(selectedButton.getId());
+		switch (selectedButton.getId()) {
+			case "smallSize":
+				width.getValueFactory().setValue(30);
+				height.getValueFactory().setValue(30);
+				break;
+			case "mediumSize":
+				width.getValueFactory().setValue(50);
+				height.getValueFactory().setValue(50);
+				break;
+			case "bigSize":
+				width.getValueFactory().setValue(70);
+				height.getValueFactory().setValue(70);
+				break;
+		}
 	}
 
 	@FXML
@@ -43,7 +91,7 @@ public class GameSettings {
 		try {
 			switch (((Control) event.getSource()).getId()) {
 				case "playButton":
-					newGame();
+					newGame(mineCount.getValue(), width.getValue(), height.getValue());
 					break;
 				case "backButton":
 					Menu.init();

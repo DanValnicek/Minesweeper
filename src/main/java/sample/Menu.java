@@ -17,7 +17,9 @@ import java.util.Objects;
 public class Menu {
 	static Scene menuScene;
 
+public Menu(){
 
+}
 	public static void init() throws IOException {
 		menuScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/menu.fxml"))));
 		sceneInit(menuScene);
@@ -46,10 +48,8 @@ public class Menu {
 		try {
 			switch (((Control) event.getSource()).getId()) {
 				case "playButton":
-					GameSettings.init();
-//					game = new Game(100, 30, 30);
-//					Stage gameWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//					gameWindow.setScene(Game.getScene());
+					sceneInit(new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettings.fxml")))));
+					new GameSettings(30,30, 225);
 					break;
 				case "accountButton":
 					accountTab.init();
