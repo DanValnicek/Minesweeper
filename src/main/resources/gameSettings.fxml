@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" onKeyPressed="#eventFilter" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameSettings">
+<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameSettings">
 	<!--   <columnConstraints>-->
 	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
 	<!--   </columnConstraints>-->
@@ -166,7 +166,7 @@
 									<Cursor fx:constant="HAND" />
 								</cursor>
 								<graphic>
-									<Spinner fx:id="percentOfMines" editable="true" onInputMethodTextChanged="#setCustomMines" onKeyTyped="#setCustomMines" onMouseClicked="#setCustomMines" prefHeight="25.0" prefWidth="63.0">
+									<Spinner fx:id="percentOfMines" editable="true" onMouseClicked="#selectDifficulty" onMousePressed="#selectDifficulty" prefHeight="25.0" prefWidth="63.0">
 										<valueFactory>
 											<SpinnerValueFactory.IntegerSpinnerValueFactory max="99" min="1" />
 										</valueFactory>
@@ -177,7 +177,7 @@
 					</AnchorPane>
 					<AnchorPane blendMode="MULTIPLY" minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="65.0">
 						<children>
-							<ToggleButton fx:id="smallSize" layoutX="6.0" layoutY="39.0" mnemonicParsing="false" onAction="#selectSize" prefHeight="30.0" prefWidth="50.0" text="30x30">
+							<ToggleButton fx:id="smallSize" layoutX="6.0" layoutY="39.0" mnemonicParsing="false" onAction="#selectSize" prefHeight="30.0" prefWidth="50.0" selected="true" text="30x30">
 								<toggleGroup>
 									<ToggleGroup fx:id="size" />
 								</toggleGroup>
@@ -226,7 +226,7 @@
 					<Label alignment="CENTER" prefHeight="17.0" prefWidth="60.0" text="mines" />
 					<Spinner fx:id="mineCount" editable="true" prefHeight="25.0" prefWidth="70.0">
 						<valueFactory>
-							<SpinnerValueFactory.IntegerSpinnerValueFactory max="5000" min="25" />
+							<SpinnerValueFactory.IntegerSpinnerValueFactory max="5000" min="1" />
 						</valueFactory>
 					</Spinner>
 					<Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="60.0" text="width" />

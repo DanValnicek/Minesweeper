@@ -6,12 +6,10 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameSettings implements Initializable {
@@ -30,28 +28,15 @@ public class GameSettings implements Initializable {
 	private Spinner<Integer> mineCount;
 	@FXML
 	private ToggleButton custom;
-	@FXML
-	private ToggleButton smallSize;
-	private boolean setup = false;
 
 	public static void newGame(int mineCount, int width, int height) throws IOException {
 		game = new Game(mineCount, height, width);
 	}
 
 	@FXML
-	private void setCustomMines() throws Exception {
-		custom.setSelected(true);
-		selectDifficulty();
-	}
-
-	@FXML
-	private void selectDifficulty() throws Exception {
+	private void selectDifficulty() {
 		ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
 		System.out.println(selectedButton.getId());
-		if (size.getSelectedToggle() == null) {
-			smallSize.setSelected(true);
-			selectSize();
-		}
 		switch (selectedButton.getId()) {
 			case "easyDiff":
 				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
@@ -71,7 +56,7 @@ public class GameSettings implements Initializable {
 	}
 
 	@FXML
-	private void selectSize() throws Exception {
+	private void selectSize() {
 		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
 		System.out.println(selectedButton.getId());
 		switch (selectedButton.getId()) {
@@ -92,17 +77,8 @@ public class GameSettings implements Initializable {
 	}
 
 	@FXML
-	private void eventFilter(KeyEvent event) {
-		if (custom.isDisabled()) {
-
-		}
-
-	}
-
-	@FXML
-	public void playOnClickEvent(MouseEvent event) {
+	public void playOnClickEvent(MouseEvent event) throws IOException {
 		System.out.println(((Control) event.getSource()).getId());
-		try {
 			switch (((Control) event.getSource()).getId()) {
 				case "playButton":
 					newGame(mineCount.getValue(), width.getValue(), height.getValue());
@@ -111,25 +87,38 @@ public class GameSettings implements Initializable {
 					Menu.init();
 					break;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		selectSize();
 		difficulty.selectedToggleProperty().addListener(((observableValue, oldVal, newVal) -> {
 			if (newVal == null)
 				oldVal.setSelected(true);
 		}));
 		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
-			if(newVal != null){
-				try {
+			if (newVal != null) {
+				custom.setSelected(true);
 					percentOfMines.increment(0);
 					selectDifficulty();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			}
+		});
+		width.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
+			if (newVal.length() > 1) {
+					width.increment(0);
+					selectDifficulty();
+			}
+		});
+		height.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
+			System.out.println(newVal);
+			if (newVal.length() > 1) {
+					height.increment(0);
+					selectDifficulty();
+			}
+		});
+		mineCount.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
+			if (newVal != null) {
+					width.increment(0);
 			}
 		});
 	}
