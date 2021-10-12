@@ -1,21 +1,23 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class GameSettings {
+public class GameSettings implements Initializable {
 	static Game game;
 	@FXML
-	private static Spinner<Double> percentOfMines;
+	private Spinner<Integer> percentOfMines;
 	@FXML
 	private ToggleGroup difficulty;
 	@FXML
@@ -26,28 +28,30 @@ public class GameSettings {
 	private Spinner<Integer> height;
 	@FXML
 	private Spinner<Integer> mineCount;
-
-	public GameSettings(int width, int height, int mineCount) throws IOException {
-
-
-		this.width.getValueFactory().setValue(width);
-		this.height.getValueFactory().setValue(height);
-		this.mineCount.getValueFactory().setValue(mineCount);
-		percentOfMines.getValueFactory().setValue(55.0);
-
-	}
-
-	public static void init() throws IOException {
-	}
+	@FXML
+	private ToggleButton custom;
+	@FXML
+	private ToggleButton smallSize;
+	private boolean setup = false;
 
 	public static void newGame(int mineCount, int width, int height) throws IOException {
 		game = new Game(mineCount, height, width);
 	}
 
 	@FXML
+	private void setCustomMines() throws Exception {
+		custom.setSelected(true);
+		selectDifficulty();
+	}
+
+	@FXML
 	private void selectDifficulty() throws Exception {
 		ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
 		System.out.println(selectedButton.getId());
+		if (size.getSelectedToggle() == null) {
+			smallSize.setSelected(true);
+			selectSize();
+		}
 		switch (selectedButton.getId()) {
 			case "easyDiff":
 				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
@@ -59,6 +63,7 @@ public class GameSettings {
 				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
 				break;
 			case "custom":
+				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * percentOfMines.getValue() / 100));
 				System.out.println(percentOfMines.getValue());
 				break;
 
@@ -83,6 +88,15 @@ public class GameSettings {
 				height.getValueFactory().setValue(70);
 				break;
 		}
+		selectDifficulty();
+	}
+
+	@FXML
+	private void eventFilter(KeyEvent event) {
+		if (custom.isDisabled()) {
+
+		}
+
 	}
 
 	@FXML
@@ -100,5 +114,23 @@ public class GameSettings {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		difficulty.selectedToggleProperty().addListener(((observableValue, oldVal, newVal) -> {
+			if (newVal == null)
+				oldVal.setSelected(true);
+		}));
+		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
+			if(newVal != null){
+				try {
+					percentOfMines.increment(0);
+					selectDifficulty();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

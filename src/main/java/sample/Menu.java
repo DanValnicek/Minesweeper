@@ -49,7 +49,7 @@ public Menu(){
 			switch (((Control) event.getSource()).getId()) {
 				case "playButton":
 					sceneInit(new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettings.fxml")))));
-					new GameSettings(30,30, 225);
+//					new GameSettingsInitializer(30,30,225);
 					break;
 				case "accountButton":
 					accountTab.init();

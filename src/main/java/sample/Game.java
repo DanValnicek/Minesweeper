@@ -114,5 +114,8 @@ public class Game {
 
 		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
 	}
+	public void prepareGameSettings(){
+
+	}
 }
 
