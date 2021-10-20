@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -12,24 +13,20 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class Game {
-	VBox root = new VBox();
-	Scene scene = new Scene(root);
 	static int numOfMines;
 	static int numOfRows;
 	static int numOfColumns;
+	static Timeline timeline;
+	static Square[][] squares;
 	public GridPane gridPane;
+	VBox root = new VBox();
+	Scene scene = new Scene(root);
 	int numOfMarked;
 	int[][] map;
-	static Timeline timeline;
 	GameBar gameBar;
 	long startTime;
 	int[] minePositions;
-	static Square[][] squares;
 	int emptySquares;
-
-	public VBox getRoot() {
-		return root;
-	}
 
 	public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
@@ -37,9 +34,16 @@ public class Game {
 		this.numOfMines = numOfMines;
 		this.numOfRows = numOfRows;
 		this.numOfColumns = numOfColumns;
-
+		scene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
 		emptySquares = numOfColumns * numOfRows - numOfMines;
+		ScrollPane scrollPane = new ScrollPane();
 		gridPane = new GridPane();
+		scrollPane.setContent(gridPane);
+		scrollPane.pannableProperty().set(true);
+		scrollPane.fitToHeightProperty().set(true);
+		scrollPane.fitToWidthProperty().set(true);
+		scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+		scrollPane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		BackgroundFill backgroundFill = new BackgroundFill(Color.gray(0.3), CornerRadii.EMPTY, Insets.EMPTY);
 		Background background = new Background(backgroundFill);
 		gridPane.setBackground(background);
@@ -50,12 +54,36 @@ public class Game {
 		gameBar = new GameBar(numOfMines);
 		squares = new Square[numOfRows][numOfColumns];
 		generateSquares(squares, numOfColumns, numOfRows, map);
-		root.getChildren().addAll(gameBar.getAnchorPane(),gridPane);
+		root.getChildren().addAll(gameBar.getAnchorPane(), scrollPane);
 		timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
+			System.out.println(Main.getFirstStage().getHeight());
+			System.out.println(Main.getFirstStage().getWidth());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		Main.getFirstStage().setScene(scene);
+		Main.getFirstStage().setMinWidth(291);
+		Main.getFirstStage().setResizable(true);
+		Main.getFirstStage().setMinHeight(340);
+		Main.getFirstStage().setMaxWidth(Main.getFirstStage().getWidth());
+		Main.getFirstStage().setMaxHeight(Main.getFirstStage().getHeight());
+
+	}
+
+	public static void gameOver() {
+		timeline.stop();
+		squares = null;
+		System.gc();
+	}
+
+	public static void restart() throws IOException {
+		gameOver();
+
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
+	}
+
+	public VBox getRoot() {
+		return root;
 	}
 
 	public Scene getScene() {
@@ -73,7 +101,7 @@ public class Game {
 	}
 
 	public void reGenerateSquares(int forbiddenX, int forbiddenY) {
-		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX ), numOfColumns);
+		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX), numOfColumns);
 		map = MapGenerator.MapGen(numOfRows, numOfColumns, minePositions);
 		for (int y = 0; y < numOfRows; y++) {
 			for (int x = 0; x < numOfColumns; x++) {
@@ -104,17 +132,7 @@ public class Game {
 		GameBar.mineCount.setText(Integer.toString(numOfMines - numOfMarked));
 	}
 
-	public static void gameOver() {
-		timeline.stop();
-		squares = null;
-		System.gc();
-	}
-	public static void restart() throws IOException {
-		gameOver();
-
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
-	}
-	public void prepareGameSettings(){
+	public void prepareGameSettings() {
 
 	}
 }
