@@ -3,6 +3,7 @@ package sample;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,12 +26,13 @@ public Menu(){
 		sceneInit(menuScene);
 	}
 
-	static void sceneInit(Scene scene) {
+	static EventHandler<? super MouseEvent> sceneInit(Scene scene) {
 		scene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
 		rotateBackground(scene);
 		Main.getFirstStage().setResizable(false);
 		Main.getFirstStage().setTitle("Minesweeper");
 		Main.getFirstStage().setScene(scene);
+		return null;
 	}
 
 	public static void rotateBackground(Scene scene) {

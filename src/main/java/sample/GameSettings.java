@@ -2,10 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Control;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -79,14 +76,14 @@ public class GameSettings implements Initializable {
 	@FXML
 	public void playOnClickEvent(MouseEvent event) throws IOException {
 		System.out.println(((Control) event.getSource()).getId());
-			switch (((Control) event.getSource()).getId()) {
-				case "playButton":
-					newGame(mineCount.getValue(), width.getValue(), height.getValue());
-					break;
-				case "backButton":
-					Menu.init();
-					break;
-			}
+		switch (((Control) event.getSource()).getId()) {
+			case "playButton":
+				newGame(mineCount.getValue(), width.getValue(), height.getValue());
+				break;
+			case "backButton":
+				Menu.init();
+				break;
+		}
 	}
 
 	@Override
@@ -99,26 +96,29 @@ public class GameSettings implements Initializable {
 		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal != null) {
 				custom.setSelected(true);
-					percentOfMines.increment(0);
-					selectDifficulty();
+				percentOfMines.increment(0);
+				selectDifficulty();
 			}
 		});
 		width.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal.length() > 1) {
-					width.increment(0);
-					selectDifficulty();
+				width.increment(0);
+				selectDifficulty();
 			}
 		});
 		height.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			System.out.println(newVal);
 			if (newVal.length() > 1) {
-					height.increment(0);
-					selectDifficulty();
+				height.increment(0);
+				selectDifficulty();
 			}
 		});
 		mineCount.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal != null) {
-					width.increment(0);
+				mineCount.increment(0);
+				if(Integer.parseInt(newVal) > height.getValue()*width.getValue() - 9){
+					mineCount.getValueFactory().setValue(height.getValue()*width.getValue() - 9);
+				}
 			}
 		});
 	}

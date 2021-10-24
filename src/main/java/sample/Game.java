@@ -12,24 +12,20 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class Game {
-	VBox root = new VBox();
-	Scene scene = new Scene(root);
 	static int numOfMines;
 	static int numOfRows;
 	static int numOfColumns;
+	static Timeline timeline;
+	static Square[][] squares;
 	public GridPane gridPane;
+	VBox root = new VBox();
+	Scene scene = new Scene(root);
 	int numOfMarked;
 	int[][] map;
-	static Timeline timeline;
 	GameBar gameBar;
 	long startTime;
 	int[] minePositions;
-	static Square[][] squares;
 	int emptySquares;
-
-	public VBox getRoot() {
-		return root;
-	}
 
 	public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
@@ -50,12 +46,29 @@ public class Game {
 		gameBar = new GameBar(numOfMines);
 		squares = new Square[numOfRows][numOfColumns];
 		generateSquares(squares, numOfColumns, numOfRows, map);
-		root.getChildren().addAll(gameBar.getAnchorPane(),gridPane);
+		root.getChildren().addAll(gameBar.getAnchorPane(), gridPane);
 		timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		Main.getFirstStage().setScene(scene);
+	}
+
+	public static void gameOver() {
+		timeline.stop();
+		squares = null;
+		System.gc();
+
+	}
+
+	public static void restart() throws IOException {
+		gameOver();
+
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
+	}
+
+	public VBox getRoot() {
+		return root;
 	}
 
 	public Scene getScene() {
@@ -73,7 +86,7 @@ public class Game {
 	}
 
 	public void reGenerateSquares(int forbiddenX, int forbiddenY) {
-		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX ), numOfColumns);
+		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, ((forbiddenY) * numOfColumns + forbiddenX), numOfColumns);
 		map = MapGenerator.MapGen(numOfRows, numOfColumns, minePositions);
 		for (int y = 0; y < numOfRows; y++) {
 			for (int x = 0; x < numOfColumns; x++) {
@@ -102,20 +115,6 @@ public class Game {
 			this.numOfMarked--;
 		}
 		GameBar.mineCount.setText(Integer.toString(numOfMines - numOfMarked));
-	}
-
-	public static void gameOver() {
-		timeline.stop();
-		squares = null;
-		System.gc();
-	}
-	public static void restart() throws IOException {
-		gameOver();
-
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
-	}
-	public void prepareGameSettings(){
-
 	}
 }
 

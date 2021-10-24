@@ -39,6 +39,7 @@ public class Square {
 
 
 	public void setPopped(boolean popped, int x, int y) {
+
 		this.popped = popped;
 		if (!this.marked) {
 			if (value == 9) {
@@ -46,14 +47,11 @@ public class Square {
 					rectangle.setFill(Color.gray(0.4));
 				}
 				game.getGridPane().add(this.tileLabel, x, y);
-				game.gameOver();
+				Game.gameOver();
 
 			} else if (!rectangle.getFill().equals(Color.gray(0.4))) {
 				this.rectangle.setFill(Color.gray(0.4));
 				game.emptySquares--;
-				if (game.emptySquares == 0) {
-					game.timeline.stop();
-				}
 				if (value != 0) {
 					game.getGridPane().add(this.tileLabel, x, y);
 				}
@@ -65,6 +63,7 @@ public class Square {
 			}
 		}
 	}
+
 
 	private int getNumOfMarked(int x, int y) {
 		int numOfMarked = 0;
@@ -97,17 +96,17 @@ public class Square {
 					if (event.getButton() == MouseButton.PRIMARY) {
 						if (game.startTime == 0 && value == 0) {
 							game.startGame();
-						} else if(game.startTime == 0) {
-							System.out.println("x:"+x+"y:"+y);
+						} else if (game.startTime == 0) {
+							System.out.println("x:" + x + "y:" + y);
 							game.reGenerateSquares(x, y);
 							game.startGame();
 						}
 
 						if (!popped && !marked) {
 							if (value == 9) {
-
 								rectangle.setFill(Color.RED);
-								showAllMines(game.squares);
+								showAllMines(game.squares,true);
+								Game.gameOver();
 							} else {
 								this.setPopped(true, x, y);
 							}
@@ -130,6 +129,10 @@ public class Square {
 							game.setNumOfMarked(false);
 
 						}
+					}
+					if (game.emptySquares == 0) {
+						showAllMines(game.getSquares(), false);
+						Game.gameOver();
 					}
 					event.consume();
 
@@ -167,12 +170,12 @@ public class Square {
 		this.generateText(value);
 	}
 
-	public void showAllMines(Square[][] squares) {
+	public void showAllMines(Square[][] squares, boolean show) {
 		for (Square[] row : squares) {
 			for (Square mine : row) {
 				//Delete event handlers for all squares
 				mine.rectangle.setOnMouseClicked(null);
-				if (mine.value == 9) {
+				if (mine.value == 9 && show) {
 					mine.setPopped(true, Arrays.asList(row).indexOf(mine), Arrays.asList(squares).indexOf(row));
 				}
 			}
