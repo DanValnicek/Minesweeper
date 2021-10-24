@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 public class Client {
 
     private final String host;
-    private int port;
+    private final int port;
 
     public Client(String host, int port) {
         this.host = host;
@@ -46,7 +46,7 @@ public class Client {
                     break;
                 }
                 lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
-                if ("bye".equals(line.toLowerCase())){
+                if ("bye".equalsIgnoreCase(line)){
                     channel.channel().closeFuture().sync();
                     break;
                 }

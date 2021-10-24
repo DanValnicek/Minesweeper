@@ -15,8 +15,6 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.util.Objects;
 
-import static sample.Menu.sceneInit;
-
 public class GameBar {
 	static Label mineCount = new Label();
 	public Label timer = new Label();
@@ -33,8 +31,8 @@ public class GameBar {
 				e.printStackTrace();
 			}
 		});
-		anchorPane.setTopAnchor(reset, 5.0);
-		anchorPane.setRightAnchor(reset, 40.0);
+		AnchorPane.setTopAnchor(reset, 5.0);
+		AnchorPane.setRightAnchor(reset, 40.0);
 		Label backButton = new Label("Back");
 		backButton.setFont(Font.font("Impact", 15));
 		backButton.setTextFill(Color.RED);
@@ -46,22 +44,22 @@ public class GameBar {
 				e.printStackTrace();
 			}
 		});
-		anchorPane.setTopAnchor(backButton, 5.0);
-		anchorPane.setLeftAnchor(backButton, 40.0);
+		AnchorPane.setTopAnchor(backButton, 5.0);
+		AnchorPane.setLeftAnchor(backButton, 40.0);
 		BackgroundFill backgroundFill = new BackgroundFill(Color.gray(0.2), CornerRadii.EMPTY, Insets.EMPTY);
 		Background background = new Background(backgroundFill);
 		anchorPane.setBackground(background);
 		mineCount.setFont(Font.font("Impact", 15));
 		mineCount.setText(Integer.toString(bombCount));
 		mineCount.setTextFill(Color.YELLOW);
-		anchorPane.setLeftAnchor(mineCount, 5.0);
-		anchorPane.setTopAnchor(mineCount, 5.0);
+		AnchorPane.setLeftAnchor(mineCount, 5.0);
+		AnchorPane.setTopAnchor(mineCount, 5.0);
 		timer.setText("0:00");
 		timer.setFont(Font.font("Impact", 15));
 		timer.setTextFill(Color.YELLOW);
-		anchorPane.setRightAnchor(timer, 5.0);
-		anchorPane.setTopAnchor(timer, 5.0);
-		anchorPane.setBottomAnchor(timer, 3.0);
+		AnchorPane.setRightAnchor(timer, 5.0);
+		AnchorPane.setTopAnchor(timer, 5.0);
+		AnchorPane.setBottomAnchor(timer, 3.0);
 		anchorPane.getChildren().addAll(mineCount, timer, reset, backButton);
 	}
 

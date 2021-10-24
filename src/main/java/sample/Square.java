@@ -105,7 +105,7 @@ public class Square {
 						if (!popped && !marked) {
 							if (value == 9) {
 								rectangle.setFill(Color.RED);
-								showAllMines(game.squares,true);
+								showAllMines(Game.squares,true);
 								Game.gameOver();
 							} else {
 								this.setPopped(true, x, y);
@@ -118,7 +118,7 @@ public class Square {
 							}
 						}
 					} else if (event.getButton() == MouseButton.SECONDARY && !game.getSquares()[y][x].popped) {
-						if (!game.getGridPane().getChildren().contains(flag) && game.numOfMines - game.numOfMarked > 0) {
+						if (!game.getGridPane().getChildren().contains(flag) && Game.numOfMines - game.numOfMarked > 0) {
 							game.getGridPane().add(flag, x, y);
 							marked = true;
 							game.setNumOfMarked(true);

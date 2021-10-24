@@ -30,9 +30,9 @@ public class Game {
 	public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
 
-		this.numOfMines = numOfMines;
-		this.numOfRows = numOfRows;
-		this.numOfColumns = numOfColumns;
+		Game.numOfMines = numOfMines;
+		Game.numOfRows = numOfRows;
+		Game.numOfColumns = numOfColumns;
 
 		emptySquares = numOfColumns * numOfRows - numOfMines;
 		gridPane = new GridPane();
