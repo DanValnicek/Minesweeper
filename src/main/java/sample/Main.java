@@ -28,7 +28,6 @@ public class Main extends Application {
         Menu.init();
         primaryStage.sizeToScene();
         primaryStage.show();
-
     }
 }
 //TODO: game options menu
