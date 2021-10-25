@@ -2,11 +2,15 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Control;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GameSettings implements Initializable {
@@ -32,23 +36,18 @@ public class GameSettings implements Initializable {
 
 	@FXML
 	private void selectDifficulty() {
-		ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
-		System.out.println(selectedButton.getId());
-		switch (selectedButton.getId()) {
-			case "easyDiff":
-				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
-				break;
-			case "mediumDiff":
-				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.50));
-				break;
-			case "hardDiff":
-				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
-				break;
-			case "custom":
-				mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * percentOfMines.getValue() / 100));
-				System.out.println(percentOfMines.getValue());
-				break;
-
+		if (difficulty.getSelectedToggle() != null) {
+			ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
+			System.out.println(selectedButton.getId());
+			switch (selectedButton.getId()) {
+				case "easyDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
+				case "mediumDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.50));
+				case "hardDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
+				case "custom" -> {
+					mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * percentOfMines.getValue() / 100));
+					System.out.println(percentOfMines.getValue());
+				}
+			}
 		}
 	}
 
@@ -57,18 +56,18 @@ public class GameSettings implements Initializable {
 		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
 		System.out.println(selectedButton.getId());
 		switch (selectedButton.getId()) {
-			case "smallSize":
+			case "smallSize" -> {
 				width.getValueFactory().setValue(30);
 				height.getValueFactory().setValue(30);
-				break;
-			case "mediumSize":
+			}
+			case "mediumSize" -> {
 				width.getValueFactory().setValue(50);
 				height.getValueFactory().setValue(50);
-				break;
-			case "bigSize":
+			}
+			case "bigSize" -> {
 				width.getValueFactory().setValue(70);
 				height.getValueFactory().setValue(70);
-				break;
+			}
 		}
 		selectDifficulty();
 	}
@@ -89,10 +88,7 @@ public class GameSettings implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		selectSize();
-		difficulty.selectedToggleProperty().addListener(((observableValue, oldVal, newVal) -> {
-			if (newVal == null)
-				oldVal.setSelected(true);
-		}));
+		System.out.println("idk");
 		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal != null) {
 				custom.setSelected(true);
@@ -101,23 +97,35 @@ public class GameSettings implements Initializable {
 			}
 		});
 		width.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
-			if (newVal.length() > 1) {
+			if (newVal.length() > 1 && width.isFocused()) {
+				if (size.getSelectedToggle() != null ) {
+					size.getSelectedToggle().setSelected(false);
+					System.out.println("Unselected");
+				}
 				width.increment(0);
 				selectDifficulty();
 			}
 		});
 		height.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			System.out.println(newVal);
-			if (newVal.length() > 1) {
+			if (newVal.length() > 1 && height.isFocused()) {
+				if (size.getSelectedToggle() != null) {
+					System.out.println("Unselected");
+					size.getSelectedToggle().setSelected(false);
+				}
 				height.increment(0);
 				selectDifficulty();
 			}
 		});
 		mineCount.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
-			if (newVal != null) {
+			if (!Objects.equals(newVal, oldVal)) {
+				if (difficulty.getSelectedToggle() != null && mineCount.isFocused()) {
+					difficulty.getSelectedToggle().setSelected(false);
+				}
+				System.out.println(difficulty.getSelectedToggle());
 				mineCount.increment(0);
-				if(Integer.parseInt(newVal) > height.getValue()*width.getValue() - 9){
-					mineCount.getValueFactory().setValue(height.getValue()*width.getValue() - 9);
+				if (Integer.parseInt(newVal) > height.getValue() * width.getValue() - 9) {
+					mineCount.getValueFactory().setValue(height.getValue() * width.getValue() - 9);
 				}
 			}
 		});

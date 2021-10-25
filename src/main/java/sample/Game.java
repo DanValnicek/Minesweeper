@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -29,10 +30,6 @@ public class Game {
 	int[] minePositions;
 	int emptySquares;
 
-	public VBox getRoot() {
-		return root;
-	}
-
 	public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
 
 
@@ -41,6 +38,7 @@ public class Game {
 		Game.numOfColumns = numOfColumns;
 
 		emptySquares = numOfColumns * numOfRows - numOfMines;
+		scene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
 		ScrollPane scrollPane = new ScrollPane();
 		gridPane = new GridPane();
 		scrollPane.setContent(gridPane);
@@ -73,18 +71,6 @@ public class Game {
 		Main.getFirstStage().setMaxWidth(Main.getFirstStage().getWidth());
 		Main.getFirstStage().setMaxHeight(Main.getFirstStage().getHeight());
 
-	}
-
-	public static void gameOver() {
-		timeline.stop();
-		squares = null;
-		System.gc();
-	}
-
-	public static void restart() throws IOException {
-		gameOver();
-
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
 	}
 
 	public VBox getRoot() {
