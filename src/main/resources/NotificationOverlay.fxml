@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="pane" blendMode="OVERLAY" depthTest="DISABLE" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" mouseTransparent="true" prefHeight="269.0" prefWidth="525.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.NotificationOverlay">
+	<children>
+		<Pane fx:id="messagePane" layoutX="388.0" layoutY="60.0" prefHeight="55.0" prefWidth="136.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="60.0">
+			<children>
+				<Label fx:id="messageText" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="55.0" prefWidth="136.0" text=" fdgsdfhfdhsdhdf shdfshs dhsdhdshdsjhsrtjeasrtghr" textAlignment="CENTER" textFill="#dd0000" wrapText="true">
+               <tooltip>
+                  <Tooltip fx:id="messageTextTooltip" text="Empty Tooltip" />
+               </tooltip></Label>
+			</children>
+		</Pane>
+	</children>
+</AnchorPane>

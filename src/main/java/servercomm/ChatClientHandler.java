@@ -1,29 +1,55 @@
 package servercomm;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
-
-import java.nio.charset.StandardCharsets;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import sample.Main;
 
 public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String in) throws Exception {
+	protected void channelRead0(ChannelHandlerContext channelHandlerContext, String in) throws Exception {
 //        System.out.println("idk channelRead0");
+	/*	Platform.runLater(() -> {
+					Popup popup = new Popup();
+					Stage popupStage = new Stage();
+//			Main.getFirstStage().getScene().lookup("#errorBox").setAccessibleText(in);
+//		Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+//					errorAlert.setHeaderText("Alert");
+//					errorAlert.setContentText(in);
+//					errorAlert.showAndWait();
+					Label message = new Label(in);
+					popupStage.setScene(Main.getFirstStage().getScene());
 
-        System.out.println(in);
-        ReferenceCountUtil.release(in);
-    }
+					message.setTextFill(Color.RED);
+					popup.getContent().add(message);
+					popup.setAutoFix(true);
+					popup.setX(Main.getFirstStage().getWidth());
 
-    public void exeptionCaught(ChannelHandlerContext channelHandlerContext, Throwable cause) {
+					popup.show(Main.getFirstStage());
+					popupStage.show();
+//					Main.getFirstStage().getScene().
+
+				}
+		);
+				*/
+//		if(in.startsWith("error:")){
+//			Main.getFirstStage().getScene();
+//		}
+		System.out.println(in);
+		ReferenceCountUtil.release(in);
+	}
+
+	public void exeptionCaught(ChannelHandlerContext channelHandlerContext, Throwable cause) {
 //        System.out.println("idk exeptionCaught");
-        cause.printStackTrace();
-        channelHandlerContext.close();
-    }
+		cause.printStackTrace();
+		channelHandlerContext.close();
+	}
 
 //    @Override
 //    public void channelActive(ChannelHandlerContext channelHandlerContext){

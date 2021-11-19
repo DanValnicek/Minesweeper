@@ -13,55 +13,65 @@ import java.io.InputStreamReader;
 
 public class Client {
 
-    private final String host;
-    private final int port;
+	private final String host;
+	private final int port;
+	ChannelFuture channel;
+	ChannelFuture lastWriteFuture;
 
-    public Client(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
+	public Client(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
 
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 //        new Client("127.0.0.1", 56850).run();
-        new Client("165.22.76.230", 56850).run();
-        //server 165.22.76.230
-    }
+		new Client("165.22.76.230", 56850).run();
+		//server 165.22.76.230
+	}
 
-    public void run() throws IOException {
-        EventLoopGroup group = new NioEventLoopGroup();
+	public void run() throws IOException {
+		EventLoopGroup group = new NioEventLoopGroup();
 
-        try {
-            Bootstrap bootstrap = new Bootstrap()
-                    .group(group)
-                    .option(ChannelOption.SO_KEEPALIVE, true)
-                    .channel(NioSocketChannel.class)
-                    .handler(new ChatClientInitializer());
-            ChannelFuture channel = bootstrap.connect(host,port).sync();
+		try {
+			Bootstrap bootstrap = new Bootstrap()
+					.group(group)
+					.option(ChannelOption.SO_KEEPALIVE, true)
+					.channel(NioSocketChannel.class)
+					.handler(new ChatClientInitializer());
+			channel = bootstrap.connect(host, port).sync();
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            ChannelFuture lastWriteFuture= null;
-            while (true) {
-                String line = in.readLine();
-                if (line == null) {
-                    break;
-                }
-                lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
-                if ("bye".equalsIgnoreCase(line)){
-                    channel.channel().closeFuture().sync();
-                    break;
-                }
-            }
-            if(lastWriteFuture != null){
-                lastWriteFuture.sync();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            group.shutdownGracefully();
-        }
+			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			lastWriteFuture = null;
+			while (true) {
+				String line = in.readLine();
+				if (line == null) {
+					break;
+				}
+				lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
+				if ("bye".equalsIgnoreCase(line)) {
+					channel.channel().closeFuture().sync();
+					break;
+				}
+			}
+			if (lastWriteFuture != null) {
+				lastWriteFuture.sync();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			group.shutdownGracefully();
+		}
 
+	}
 
-    }
+	public void sendMessage(String message) throws InterruptedException {
+		lastWriteFuture = null;
+		lastWriteFuture = channel.channel().writeAndFlush(message + "\r\n");
+		if (lastWriteFuture != null) {
+			lastWriteFuture.sync();
+		}
+	}
+
 //    public Client(String host, int port, final String message, final AtomicInteger messageWritten, final AtomicInteger messageRead) throws IOException {
 //        //create a socket channel
 //        AsynchronousSocketChannel sockChannel = AsynchronousSocketChannel.open();

@@ -3,7 +3,7 @@ package sample;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -38,7 +38,8 @@ public class GameBar {
 		backButton.setTextFill(Color.RED);
 		backButton.setOnMouseClicked(mouseEvent -> {
 			try {
-				Menu.sceneInit(new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettings.fxml")))));
+				Main.getFirstStage().setScene(Main.rootScene);
+				Menu.sceneInit(new SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettings.fxml"))),525,269));
 				System.gc();
 			} catch (IOException e) {
 				e.printStackTrace();

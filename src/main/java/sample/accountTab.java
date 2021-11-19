@@ -1,32 +1,52 @@
 package sample;
 
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import org.json.simple.JSONObject;
+import servercomm.Client;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
-public class accountTab {
+public class accountTab implements Initializable, SceneInterface {
 	private static Scene accountScene;
 	@FXML
 	private VBox loginBox;
 	@FXML
 	private VBox registerBox;
-
 	@FXML
-	public static void init() throws IOException {
-		accountScene = new Scene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/accountTab.fxml"))));
-		Menu.sceneInit(accountScene);
-//		loginBox = (VBox) accountScene.lookup("#loginBox");
-//		registerBox = (VBox) accountScene.lookup("#registerBox");
+	private TextField usernameField;
+	@FXML
+	private PasswordField passwordField;
+	@FXML
+	private TextField regUsername;
+	@FXML
+	private PasswordField password1;
+	@FXML
+	private PasswordField password2;
+	@FXML
+	private Label errorBox;
+
+
+	@Override
+	public void addOverlay() {
+
+	}
+
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+
 	}
 
 	@FXML
@@ -49,8 +69,10 @@ public class accountTab {
 					loginBox.setVisible(false);
 					registerBox.setVisible(true);
 					break;
+				case "register":
+					register();
 			}
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,13 +85,20 @@ public class accountTab {
 
 	@FXML
 	private void login() {
-		TextField username = (TextField) accountScene.lookup("#usernaneField");
-		PasswordField password = (PasswordField) accountScene.lookup("#passwordField");
-		System.out.println(username.getText());
-		System.out.println(password.getText());
+		System.out.println(usernameField.getText());
+		System.out.println(passwordField.getText());
 	}
 
-	private void register() {
-
+	@FXML
+	private void register() throws InterruptedException {
+		if (regUsername.getText() != null && password1.getText().equals(password2.getText())) {
+			JSONObject message = new JSONObject();
+			message.put("queryType", "update");
+			message.put("operation", "register");
+			message.put(0, regUsername.getText());
+			message.put(1, password1.getText());
+			Main.client.sendMessage(message.toJSONString());
+			System.out.println("register");
+		}
 	}
 }

@@ -60,8 +60,6 @@ public class Game {
 		root.getChildren().addAll(gameBar.getAnchorPane(), scrollPane);
 		timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
-			System.out.println(Main.getFirstStage().getHeight());
-			System.out.println(Main.getFirstStage().getWidth());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		Main.getFirstStage().setScene(scene);

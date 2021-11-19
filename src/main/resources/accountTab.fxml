@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.accountTab">
+<AnchorPane centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.accountTab">
     <!--   <columnConstraints>-->
     <!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
     <!--   </columnConstraints>-->
@@ -51,7 +42,7 @@
         </Circle>
         <VBox fx:id="loginBox" alignment="CENTER" layoutX="5.0" layoutY="24.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPress" prefHeight="269.0" prefWidth="514.0">
             <children>
-            <TextField fx:id="usernaneField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Username">
+            <TextField fx:id="usernameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Username">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
@@ -78,22 +69,22 @@
         </VBox>
       <VBox fx:id="registerBox" alignment="CENTER" layoutX="-1.0" layoutY="79.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="191.0" prefWidth="525.0" visible="false">
          <children>
-            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Username">
+            <TextField fx:id="regUsername" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Username">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Password">
+            <PasswordField fx:id="password1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Password">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <PasswordField alignment="CENTER" layoutX="144.0" layoutY="149.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Password">
+            <PasswordField fx:id="password2" alignment="CENTER" layoutX="144.0" layoutY="149.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="257.0" promptText="Password">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <Button mnemonicParsing="false" text="Register">
+            <Button fx:id="register" mnemonicParsing="false" onAction="#register" text="Register">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -104,7 +95,25 @@
          </cursor>
       </VBox>
       <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Back" />
-      <Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="264.0" stylesheets="@style.css" text="Account" textAlignment="CENTER" translateX="131.0" translateY="52.0">
+      <Label fx:id="errorBox" alignment="BOTTOM_LEFT" layoutX="1.0" layoutY="18.0" prefHeight="38.0" prefWidth="264.0" stylesheets="@style.css" textAlignment="CENTER" textFill="RED" translateX="131.0" translateY="52.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
+      <Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="24.0" prefHeight="38.0" prefWidth="178.0" stylesheets="@style.css" text="Account" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
