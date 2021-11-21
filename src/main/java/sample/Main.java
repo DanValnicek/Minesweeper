@@ -10,15 +10,21 @@ import servercomm.Client;
 import java.util.concurrent.CompletableFuture;
 
 public class Main extends Application {
+//	public static Image flag = new Image("/MonkaS.gif", true);
+	public static Image flag;
 
-	public static Image flag = new Image("/MonkaS.gif", true);
-	public static Image mine = new Image("/jebaited.png", true);
+
+	//	public static Image flag = new Image("C:\\Users\\danva\\IdeaProjects\\Minesweeper\\src\\main\\resources\\MonkaS.gif", true);
+//	public static Image mine = new Image("/jebaited.png", true);
+	public static Image mine;
+	//	public static Image mine = new Image("C:\\Users\\danva\\IdeaProjects\\Minesweeper\\src\\main\\resources\\jebaited.png", true);
 	public static Stage firstStage;
 	public static Client client;
 	public static StackPane stackPane;
 	public static Scene rootScene;
 
 	public static void main(String[] args) {
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		launch(args);
 	}
 
@@ -55,4 +61,3 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 }
-//TODO: game options menu
