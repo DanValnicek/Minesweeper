@@ -7,17 +7,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import servercomm.Client;
 
+import java.io.File;
 import java.util.concurrent.CompletableFuture;
 
 public class Main extends Application {
-//	public static Image flag = new Image("/MonkaS.gif", true);
 	public static Image flag;
-
-
-	//	public static Image flag = new Image("C:\\Users\\danva\\IdeaProjects\\Minesweeper\\src\\main\\resources\\MonkaS.gif", true);
-//	public static Image mine = new Image("/jebaited.png", true);
-	public static Image mine;
-	//	public static Image mine = new Image("C:\\Users\\danva\\IdeaProjects\\Minesweeper\\src\\main\\resources\\jebaited.png", true);
+	public static Image mine ;
 	public static Stage firstStage;
 	public static Client client;
 	public static StackPane stackPane;
@@ -38,6 +33,8 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		flag = new Image(getClass().getResource("/MonkaS.gif").toExternalForm(),true);
+		mine = new Image(getClass().getResource("/jebaited.png").toExternalForm(),true);
 		CompletableFuture.runAsync(() -> {
 					if (client == null) {
 						try {

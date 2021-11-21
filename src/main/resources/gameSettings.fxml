@@ -88,11 +88,11 @@
 				<children>
 					<AnchorPane blendMode="MULTIPLY" minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="382.0">
 						<children>
-							<ToggleButton fx:id="easyDiff" accessibleRole="IMAGE_VIEW" contentDisplay="TOP" depthTest="ENABLE" selected="true" layoutX="6.0" layoutY="38.0" mnemonicParsing="false" onAction="#selectDifficulty" prefHeight="68.0" prefWidth="63.0" text="EZ">
+							<ToggleButton fx:id="easyDiff" accessibleRole="IMAGE_VIEW" contentDisplay="TOP" depthTest="ENABLE" layoutX="6.0" layoutY="38.0" mnemonicParsing="false" onAction="#selectDifficulty" prefHeight="68.0" prefWidth="63.0" selected="true" text="EZ">
 								<graphic>
 									<ImageView accessibleRole="TOGGLE_BUTTON" fitHeight="59.0" fitWidth="73.0">
 										<image>
-											<Image url="@../../../../../Downloads/clipart2597505.png" />
+											<Image url="@ezImg.png" />
 										</image>
 									</ImageView>
 								</graphic>
@@ -110,7 +110,7 @@
 								<graphic>
 									<ImageView accessibleRole="TOGGLE_BUTTON" fitHeight="59.0" fitWidth="73.0">
 										<image>
-											<Image url="@../../../../../Downloads/PngItem_1224806.png" />
+											<Image url="@lulImg.png" />
 										</image>
 									</ImageView>
 								</graphic>
@@ -125,7 +125,7 @@
 								<graphic>
 									<ImageView accessibleRole="TOGGLE_BUTTON" fitHeight="59.0" fitWidth="73.0">
 										<image>
-											<Image url="@../../../../../Downloads/pngkey.com-cmonbruh-png-8926869.png" />
+											<Image url="@kappaImg.png" />
 										</image>
 									</ImageView>
 								</graphic>
