@@ -13,14 +13,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.json.simple.JSONObject;
-import servercomm.Client;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
 
-public class accountTab implements Initializable, SceneInterface {
+public class accountTab extends AppSubScene implements Initializable, SceneInterface {
 	private static Scene accountScene;
 	@FXML
 	private VBox loginBox;
@@ -56,7 +54,7 @@ public class accountTab implements Initializable, SceneInterface {
 			switch (((Control) event.getSource()).getId()) {
 				case "backButton":
 					if (loginBox.isVisible()) {
-						Menu.init();
+						AppSubScene.init("/menuTab.fxml");
 					} else {
 						loginBox.setVisible(true);
 						registerBox.setVisible(false);

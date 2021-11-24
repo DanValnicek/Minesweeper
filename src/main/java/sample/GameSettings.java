@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class GameSettings implements Initializable {
+public class GameSettings extends AppSubScene implements Initializable {
 	static Game game;
 	@FXML
 	private Spinner<Integer> percentOfMines;
@@ -29,6 +29,10 @@ public class GameSettings implements Initializable {
 	private Spinner<Integer> mineCount;
 	@FXML
 	private ToggleButton custom;
+
+	public static void init() throws IOException {
+		init("/gameSettingsTab.fxml");
+	}
 
 	public static void newGame(int mineCount, int width, int height) throws IOException {
 		game = new Game(mineCount, height, width);
@@ -72,7 +76,7 @@ public class GameSettings implements Initializable {
 		selectDifficulty();
 	}
 
-	@FXML
+	@Override @FXML
 	public void playOnClickEvent(MouseEvent event) throws IOException {
 		System.out.println(((Control) event.getSource()).getId());
 		switch (((Control) event.getSource()).getId()) {
@@ -80,7 +84,7 @@ public class GameSettings implements Initializable {
 				newGame(mineCount.getValue(), width.getValue(), height.getValue());
 				break;
 			case "backButton":
-				Menu.init();
+				AppSubScene.init("/menuTab.fxml");
 				break;
 		}
 	}
@@ -98,7 +102,7 @@ public class GameSettings implements Initializable {
 		});
 		width.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal.length() > 1 && width.isFocused()) {
-				if (size.getSelectedToggle() != null ) {
+				if (size.getSelectedToggle() != null) {
 					size.getSelectedToggle().setSelected(false);
 					System.out.println("Unselected");
 				}

@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import servercomm.Client;
 
-import java.io.File;
 import java.util.concurrent.CompletableFuture;
 
 public class Main extends Application {
@@ -17,6 +16,7 @@ public class Main extends Application {
 	public static Client client;
 	public static StackPane stackPane;
 	public static Scene rootScene;
+	public  NotificationOverlay overlay;
 
 	public static void main(String[] args) {
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
@@ -48,8 +48,10 @@ public class Main extends Application {
 		);
 		firstStage = primaryStage;
 		stackPane = new StackPane();
+		overlay = new NotificationOverlay();
 		NotificationOverlay.init();
 		Menu.init();
+//		sample.Scene.init("/menuTab.fxml");
 		stackPane.getChildren().add(NotificationOverlay.notifOverlay);
 		rootScene = new Scene(stackPane);
 		rootScene.getStylesheets().add("/style.css");
@@ -57,4 +59,5 @@ public class Main extends Application {
 		primaryStage.sizeToScene();
 		primaryStage.show();
 	}
+
 }

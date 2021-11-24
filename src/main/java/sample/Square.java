@@ -18,13 +18,11 @@ public class Square {
 
 	ImageView flag = new ImageView(Main.flag);
 	ImageView mine = new ImageView(Main.mine);
-	//    Image[] images = new Image[9];
 	boolean marked = false;
 	boolean popped = false;
 	int value;
 	Label tileLabel;
 	Rectangle rectangle;
-	//    Rectangle transparentRectangle;
 
 
 	public Square(int value) {
@@ -38,27 +36,34 @@ public class Square {
 	}
 
 
-	public void setPopped(boolean popped, int x, int y) {
+	public void setPopped(int x, int y) {
 
-		this.popped = popped;
+		this.popped = true;
 		if (!this.marked) {
 			if (value == 9) {
-				if (!rectangle.getFill().equals(Color.RED)) {
-					rectangle.setFill(Color.gray(0.4));
+				game.getGridPane().add(generateText(this.value), x, y);
+				if (Game.isRunning) {
+					rectangle.setFill(Color.RED);
+					Game.isRunning = false;
+					showAllMines(game.getSquares(), true);
+					Game.gameOver();
 				}
-				game.getGridPane().add(this.tileLabel, x, y);
-				Game.gameOver();
-
-			} else if (!rectangle.getFill().equals(Color.gray(0.4))) {
+				if (!rectangle.getFill().equals(Color.RED)) {
+					game.getGridPane().getChildren().remove(this.rectangle);
+				}
+			} else if (rectangle != null) {
 				this.rectangle.setFill(Color.gray(0.4));
 				game.emptySquares--;
 				if (value != 0) {
-					game.getGridPane().add(this.tileLabel, x, y);
+					game.getGridPane().add(generateText(this.value), x, y);
 				}
+				this.rectangle = null;
 				if (value == 0) {
-					rectangle.setOnMouseClicked(null);
-
-					popNeighbours(y, x);
+					this.popNeighbours(y, x);
+					if (this.rectangle != null) {
+						this.rectangle.setOnMouseClicked(null);
+						game.getGridPane().getChildren().remove(this.rectangle);
+					}
 				}
 			}
 		}
@@ -82,21 +87,13 @@ public class Square {
 		rectangle.arcHeightProperty().set(4.5d);
 		rectangle.arcWidthProperty().set(4.5d);
 
-//        rectangle.setPickOnBounds(true);
-//        System.out.println(rectangle.getX());
 		rectangle.setFill(Color.TOMATO);
 		rectangle.fillProperty();
-		generateText(value);
-
-
-//        text.setTextFill(Color.gray(0.5));
-//        transparentRectangle = new Rectangle(0, 0, 20, 20);
-//        transparentRectangle.setOpacity(0.0);
 		rectangle.setOnMouseClicked(event -> {
 					if (event.getButton() == MouseButton.PRIMARY) {
-						if (game.startTime == 0 && value == 0) {
+						if (!Game.isRunning && value == 0) {
 							game.startGame();
-						} else if (game.startTime == 0) {
+						} else if (!Game.isRunning) {
 							System.out.println("x:" + x + "y:" + y);
 							game.reGenerateSquares(x, y);
 							game.startGame();
@@ -105,16 +102,15 @@ public class Square {
 						if (!popped && !marked) {
 							if (value == 9) {
 								rectangle.setFill(Color.RED);
-								showAllMines(Game.squares,true);
+								showAllMines(Game.squares, true);
 								Game.gameOver();
 							} else {
-								this.setPopped(true, x, y);
+								this.setPopped(x, y);
 							}
 						} else if (popped) {
 							int numOfMarked = this.getNumOfMarked(x, y);
 							if (value - numOfMarked == 0) {
 								this.popNeighbours(y, x);
-								this.rectangle.setOnMouseClicked(null);
 							}
 						}
 					} else if (event.getButton() == MouseButton.SECONDARY && !game.getSquares()[y][x].popped) {
@@ -131,7 +127,6 @@ public class Square {
 						}
 					}
 					if (game.emptySquares == 0) {
-						showAllMines(game.getSquares(), false);
 						Game.gameOver();
 					}
 					event.consume();
@@ -143,14 +138,15 @@ public class Square {
 	private void popNeighbours(int y, int x) {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				if (x + j < game.getSquares()[y].length && x + j > -1 && y + i < game.getSquares().length && y + i > -1 && !game.getSquares()[y + i][x + j].marked) {
-					game.getSquares()[y + i][x + j].setPopped(true, x + j, y + i);
+				if (game.getSquares() != null && y + i < game.getSquares().length && y + i > -1 && x + j < game.getSquares()[y].length && x + j > -1 && !game.getSquares()[y + i][x + j].marked) {
+					game.getSquares()[y + i][x + j].setPopped(x + j, y + i);
 				}
 			}
 		}
+
 	}
 
-	private void generateText(int value) {
+	private Label generateText(int value) {
 		tileLabel = new Label();
 		GridPane.setHalignment(tileLabel, HPos.CENTER);
 		Color[] colors = {null, Color.BLUE, Color.DARKGREEN, Color.RED, Color.DARKBLUE, Color.BROWN, Color.CYAN, Color.BLACK, Color.GREY};
@@ -163,22 +159,22 @@ public class Square {
 			tileLabel.setFont(Font.font("Arial Black", 13));
 
 		}
-	}
-
-	public void changeValues(int value) {
-		this.value = value;
-		this.generateText(value);
+		return tileLabel;
 	}
 
 	public void showAllMines(Square[][] squares, boolean show) {
 		for (Square[] row : squares) {
 			for (Square mine : row) {
-				//Delete event handlers for all squares
-				mine.rectangle.setOnMouseClicked(null);
-				if (mine.value == 9 && show) {
-					mine.setPopped(true, Arrays.asList(row).indexOf(mine), Arrays.asList(squares).indexOf(row));
+				if (show && mine.value == 9) {
+					mine.setPopped(Arrays.asList(row).indexOf(mine), Arrays.asList(squares).indexOf(row));
+					Main.getFirstStage().show();
 				}
 			}
 		}
+		//Delete all event handlers
+		game.getGridPane().getChildren().forEach((square) -> {
+			square.setOnMouseClicked(null);
+		});
 	}
+
 }

@@ -7,6 +7,7 @@ sample\Square.class
 sample\GameSettings.class
 sample\SceneInterface.class
 sample\NotificationOverlay.class
+sample\AppSubScene.class
 sample\Menu.class
 sample\Game.class
 sample\NotificationOverlay$1.class
