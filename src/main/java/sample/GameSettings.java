@@ -30,26 +30,21 @@ public class GameSettings extends AppSubScene implements Initializable {
 	@FXML
 	private ToggleButton custom;
 
-	public static void init() throws IOException {
-		init("/gameSettingsTab.fxml");
-	}
 
-	public static void newGame(int mineCount, int width, int height) throws IOException {
-		game = new Game(mineCount, height, width);
+	public static void newGame(int mineCount, int width, int height, boolean resize) throws IOException {
+		game = new Game(mineCount, height, width, resize);
 	}
 
 	@FXML
 	private void selectDifficulty() {
 		if (difficulty.getSelectedToggle() != null) {
 			ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
-			System.out.println(selectedButton.getId());
 			switch (selectedButton.getId()) {
 				case "easyDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
 				case "mediumDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.50));
 				case "hardDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
 				case "custom" -> {
 					mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * percentOfMines.getValue() / 100));
-					System.out.println(percentOfMines.getValue());
 				}
 			}
 		}
@@ -58,7 +53,6 @@ public class GameSettings extends AppSubScene implements Initializable {
 	@FXML
 	private void selectSize() {
 		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
-		System.out.println(selectedButton.getId());
 		switch (selectedButton.getId()) {
 			case "smallSize" -> {
 				width.getValueFactory().setValue(30);
@@ -76,15 +70,15 @@ public class GameSettings extends AppSubScene implements Initializable {
 		selectDifficulty();
 	}
 
-	@Override @FXML
+	@Override
+	@FXML
 	public void playOnClickEvent(MouseEvent event) throws IOException {
-		System.out.println(((Control) event.getSource()).getId());
 		switch (((Control) event.getSource()).getId()) {
 			case "playButton":
-				newGame(mineCount.getValue(), width.getValue(), height.getValue());
+				newGame(mineCount.getValue(), width.getValue(), height.getValue(), true);
 				break;
 			case "backButton":
-				AppSubScene.init("/menuTab.fxml");
+				Launcher.previousScene();
 				break;
 		}
 	}
@@ -92,7 +86,6 @@ public class GameSettings extends AppSubScene implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		selectSize();
-		System.out.println("idk");
 		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal != null) {
 				custom.setSelected(true);
@@ -104,7 +97,6 @@ public class GameSettings extends AppSubScene implements Initializable {
 			if (newVal.length() > 1 && width.isFocused()) {
 				if (size.getSelectedToggle() != null) {
 					size.getSelectedToggle().setSelected(false);
-					System.out.println("Unselected");
 				}
 				width.increment(0);
 				selectDifficulty();
@@ -114,7 +106,6 @@ public class GameSettings extends AppSubScene implements Initializable {
 			System.out.println(newVal);
 			if (newVal.length() > 1 && height.isFocused()) {
 				if (size.getSelectedToggle() != null) {
-					System.out.println("Unselected");
 					size.getSelectedToggle().setSelected(false);
 				}
 				height.increment(0);

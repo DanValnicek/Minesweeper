@@ -2,7 +2,6 @@ package sample;
 
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -14,11 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class accountTab extends AppSubScene implements Initializable, SceneInterface {
+public class accountTab extends AppSubScene {
 	private static Scene accountScene;
 	@FXML
 	private VBox loginBox;
@@ -38,14 +33,8 @@ public class accountTab extends AppSubScene implements Initializable, SceneInter
 	private Label errorBox;
 
 
-	@Override
-	public void addOverlay() {
 
-	}
 
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-
-	}
 
 	@FXML
 	public void playOnClickEvent(MouseEvent event) {
@@ -54,7 +43,7 @@ public class accountTab extends AppSubScene implements Initializable, SceneInter
 			switch (((Control) event.getSource()).getId()) {
 				case "backButton":
 					if (loginBox.isVisible()) {
-						AppSubScene.init("/menuTab.fxml");
+						Launcher.previousScene();
 					} else {
 						loginBox.setVisible(true);
 						registerBox.setVisible(false);
@@ -70,7 +59,7 @@ public class accountTab extends AppSubScene implements Initializable, SceneInter
 				case "register":
 					register();
 			}
-		} catch (IOException | InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
@@ -99,4 +88,7 @@ public class accountTab extends AppSubScene implements Initializable, SceneInter
 			System.out.println("register");
 		}
 	}
+
+
+
 }

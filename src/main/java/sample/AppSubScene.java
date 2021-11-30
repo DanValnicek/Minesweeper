@@ -3,8 +3,10 @@ package sample;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.SubScene;
 import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
@@ -25,30 +27,23 @@ public abstract class AppSubScene {
 		rotateTransition.setByAngle(360);
 		rotateTransition.setCycleCount(Animation.INDEFINITE);
 		rotateTransition.setInterpolator(Interpolator.LINEAR);
-		rotateTransition.play();
+		Platform.runLater(rotateTransition::play);
 	}
 
-	protected static void init(String fxml) throws IOException {
-
-		System.out.println(Main.stackPane.getChildren());
-		System.out.println(fxml);
-		scene = new javafx.scene.SubScene(FXMLLoader.load(Objects.requireNonNull(getResource(fxml))), 525, 269);
+	protected static SubScene init(String fxml) throws IOException {
+		scene = new SubScene(FXMLLoader.load(Objects.requireNonNull(getResource(fxml))), 525, 269);
 		scene.setViewOrder(1);
 		rotateBackground();
-		Main.getFirstStage().setResizable(false);
-		Main.getFirstStage().setTitle("Minesweeper");
-		Main.stackPane.getChildren().add(scene);
+		return scene;
 	}
-
 
 	@FXML
 	public void playOnClickEvent(MouseEvent event) throws IOException {
 		String id = ((Control) event.getSource()).getId();
-		System.out.println(id);
 		if (id.endsWith("Tab")) {
-			init("/" + id + ".fxml");
+			Launcher.sceneSwitch(init("/" + id + ".fxml"));
 		} else if (id.startsWith("back")) {
-			Main.stackPane.getChildren().remove(Main.stackPane.getChildren().size()-1);
+			Launcher.previousScene();
 		}
 	}
 }

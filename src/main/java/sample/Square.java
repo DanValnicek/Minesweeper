@@ -90,7 +90,7 @@ public class Square {
 		rectangle.setFill(Color.TOMATO);
 		rectangle.fillProperty();
 		rectangle.setOnMouseClicked(event -> {
-					if (event.getButton() == MouseButton.PRIMARY) {
+			if (event.getButton() == MouseButton.PRIMARY) {
 						if (!Game.isRunning && value == 0) {
 							game.startGame();
 						} else if (!Game.isRunning) {
@@ -120,7 +120,7 @@ public class Square {
 							game.setNumOfMarked(true);
 						} else if (game.getGridPane().getChildren().contains(flag)) {
 							game.getGridPane().getChildren().remove(flag);
-							Main.getFirstStage().show();
+							Launcher.getFirstStage().show();
 							marked = false;
 							game.setNumOfMarked(false);
 
@@ -167,7 +167,7 @@ public class Square {
 			for (Square mine : row) {
 				if (show && mine.value == 9) {
 					mine.setPopped(Arrays.asList(row).indexOf(mine), Arrays.asList(squares).indexOf(row));
-					Main.getFirstStage().show();
+					Launcher.getFirstStage().show();
 				}
 			}
 		}

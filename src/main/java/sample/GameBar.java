@@ -33,11 +33,9 @@ public class GameBar {
 		backButton.setFont(Font.font("Impact", 15));
 		backButton.setTextFill(Color.RED);
 		backButton.setOnMouseClicked(mouseEvent -> {
-			Main.getFirstStage().setScene(Main.rootScene);
-			Main.getFirstStage().sizeToScene();
-			Main.getFirstStage().setResizable(false);
-			Main.getFirstStage().setMinHeight(269);
-//				new SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettingsTab.fxml"))),525,269);
+			//				Launcher.newScene("/gameSettingsTab.fxml");
+			Launcher.previousScene();
+			//				new SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettingsTab.fxml"))),525,269);
 			System.gc();
 		});
 		AnchorPane.setTopAnchor(backButton, 5.0);

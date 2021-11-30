@@ -4,7 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -18,8 +17,8 @@ public class Game {
 	static int numOfColumns;
 	static Timeline timeline;
 	static Square[][] squares;
-	public GridPane gridPane;
 	static boolean isRunning = false;
+	public GridPane gridPane;
 	VBox root = new VBox();
 	int numOfMarked;
 	int[][] map;
@@ -28,17 +27,14 @@ public class Game {
 	long startTime;
 	int[] minePositions;
 	int emptySquares;
-	Scene scene = new Scene(root);
 
-	public Game(int numOfMines, int numOfRows, int numOfColumns) throws IOException {
-
+	public Game(int numOfMines, int numOfRows, int numOfColumns, boolean resize) throws IOException {
 
 		Game.numOfMines = numOfMines;
 		Game.numOfRows = numOfRows;
 		Game.numOfColumns = numOfColumns;
 
 		emptySquares = numOfColumns * numOfRows - numOfMines;
-		scene.getStylesheets().add(Menu.class.getResource("/style.css").toExternalForm());
 		ScrollPane scrollPane = new ScrollPane();
 		gridPane = new GridPane();
 		scrollPane.setContent(gridPane);
@@ -62,13 +58,8 @@ public class Game {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
-		Main.getFirstStage().setScene(scene);
-		Main.getFirstStage().setMinWidth(291);
-		Main.getFirstStage().setResizable(true);
-		Main.getFirstStage().setMinHeight(340);
-		Main.getFirstStage().setMaxWidth(Main.getFirstStage().getWidth());
-		Main.getFirstStage().setMaxHeight(Main.getFirstStage().getHeight());
 
+		Launcher.sceneSwitch(root, true, 291, 340, resize);
 	}
 
 	public static void gameOver() {
@@ -80,17 +71,14 @@ public class Game {
 
 	public static void restart() throws IOException {
 		gameOver();
-
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows);
+		Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
 	}
 
 	public VBox getRoot() {
 		return root;
 	}
 
-	public Scene getScene() {
-		return scene;
-	}
 
 	private void generateSquares(Square[][] squares, int numOfColumns, int numOfRows, int[][] map) {
 		for (int y = 0; y < numOfRows; y++) {
