@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class GameSettings implements Initializable {
+public class GameSettings extends AppSubScene implements Initializable {
 	static Game game;
 	@FXML
 	private Spinner<Integer> percentOfMines;
@@ -30,22 +30,21 @@ public class GameSettings implements Initializable {
 	@FXML
 	private ToggleButton custom;
 
-	public static void newGame(int mineCount, int width, int height) throws IOException {
-		game = new Game(mineCount, height, width);
+
+	public static void newGame(int mineCount, int width, int height, boolean resize) throws IOException {
+		game = new Game(mineCount, height, width, resize);
 	}
 
 	@FXML
 	private void selectDifficulty() {
 		if (difficulty.getSelectedToggle() != null) {
 			ToggleButton selectedButton = (ToggleButton) difficulty.getSelectedToggle();
-			System.out.println(selectedButton.getId());
 			switch (selectedButton.getId()) {
 				case "easyDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.25));
 				case "mediumDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.50));
 				case "hardDiff" -> mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * 0.75));
 				case "custom" -> {
 					mineCount.getValueFactory().setValue((int) Math.floor(width.getValue() * height.getValue() * percentOfMines.getValue() / 100));
-					System.out.println(percentOfMines.getValue());
 				}
 			}
 		}
@@ -54,7 +53,6 @@ public class GameSettings implements Initializable {
 	@FXML
 	private void selectSize() {
 		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
-		System.out.println(selectedButton.getId());
 		switch (selectedButton.getId()) {
 			case "smallSize" -> {
 				width.getValueFactory().setValue(30);
@@ -72,15 +70,15 @@ public class GameSettings implements Initializable {
 		selectDifficulty();
 	}
 
+	@Override
 	@FXML
 	public void playOnClickEvent(MouseEvent event) throws IOException {
-		System.out.println(((Control) event.getSource()).getId());
 		switch (((Control) event.getSource()).getId()) {
 			case "playButton":
-				newGame(mineCount.getValue(), width.getValue(), height.getValue());
+				newGame(mineCount.getValue(), width.getValue(), height.getValue(), true);
 				break;
 			case "backButton":
-				Menu.init();
+				Launcher.previousScene();
 				break;
 		}
 	}
@@ -88,7 +86,6 @@ public class GameSettings implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		selectSize();
-		System.out.println("idk");
 		percentOfMines.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal != null) {
 				custom.setSelected(true);
@@ -98,9 +95,8 @@ public class GameSettings implements Initializable {
 		});
 		width.getEditor().textProperty().addListener((observableValue, oldVal, newVal) -> {
 			if (newVal.length() > 1 && width.isFocused()) {
-				if (size.getSelectedToggle() != null ) {
+				if (size.getSelectedToggle() != null) {
 					size.getSelectedToggle().setSelected(false);
-					System.out.println("Unselected");
 				}
 				width.increment(0);
 				selectDifficulty();
@@ -110,7 +106,6 @@ public class GameSettings implements Initializable {
 			System.out.println(newVal);
 			if (newVal.length() > 1 && height.isFocused()) {
 				if (size.getSelectedToggle() != null) {
-					System.out.println("Unselected");
 					size.getSelectedToggle().setSelected(false);
 				}
 				height.increment(0);

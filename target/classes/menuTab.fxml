@@ -84,7 +84,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="playButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
+                <Label fx:id="gameSettingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -150,7 +150,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="accountButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
+                <Label fx:id="accountTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>

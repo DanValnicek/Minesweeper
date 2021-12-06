@@ -138,7 +138,7 @@
 							</ToggleButton>
 							<HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="2.0" prefHeight="35.0" prefWidth="387.0">
 								<children>
-									<Label alignment="BOTTOM_CENTER" style="-fx-font-weight: bold;" text="Difficulty" textAlignment="CENTER">
+									<Label fx:id="diffLabel" alignment="BOTTOM_CENTER" style="-fx-font-weight: bold;" text="Difficulty" textAlignment="CENTER">
 										<font>
 											<Font size="16.0" />
 										</font>

@@ -4,12 +4,6 @@ package servercomm;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.ReferenceCountUtil;
-import javafx.application.Platform;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import sample.Main;
 
 public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
