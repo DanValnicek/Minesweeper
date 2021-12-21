@@ -66,6 +66,7 @@ public class Client {
 
 	public void sendMessage(String message) throws InterruptedException {
 		lastWriteFuture = null;
+		System.out.println("message sent: " + message);
 		lastWriteFuture = channel.channel().writeAndFlush(message + "\r\n");
 		if (lastWriteFuture != null) {
 			lastWriteFuture.sync();

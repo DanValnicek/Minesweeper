@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<AnchorPane centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0"
+            prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.loginTab">
+	<!--   <columnConstraints>-->
+	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
+	<!--   </columnConstraints>-->
+	<!--   <rowConstraints>-->
+	<!--      <RowConstraints maxHeight="200.0" minHeight="125.0" prefHeight="125.0" />-->
+	<!--   </rowConstraints>-->
+	<children>
+		<Circle fx:id="background" centerX="262.0" centerY="134.0" layoutX="-1.0" layoutY="-14.0" radius="304.0"
+		        smooth="false" stroke="#8c000000">
+			<fill>
+				<LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+					<stops>
+						<Stop>
+							<color>
+								<Color red="0.3333333432674408" green="0.3333333432674408" blue="0.3333333432674408"/>
+							</color>
+						</Stop>
+						<Stop offset="0.5031401824860765">
+							<color>
+								<Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526"/>
+							</color>
+						</Stop>
+						<Stop offset="1.0">
+							<color>
+								<Color red="0.33000001311302185" green="0.33000001311302185"
+								       blue="0.33000001311302185"/>
+							</color>
+						</Stop>
+					</stops>
+				</LinearGradient>
+			</fill>
+		</Circle>
+		<VBox fx:id="loginBox" alignment="CENTER" layoutX="5.0" layoutY="24.0" maxWidth="1.7976931348623157E308"
+		      minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPress" prefHeight="269.0" prefWidth="514.0">
+			<children>
+				<TextField fx:id="usernameField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+				           minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0"
+				           promptText="Username">
+					<VBox.margin>
+						<Insets left="50.0" right="50.0"/>
+					</VBox.margin>
+				</TextField>
+				<PasswordField fx:id="passwordField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+				               prefHeight="25.0" prefWidth="257.0" promptText="Password">
+					<VBox.margin>
+						<Insets top="10.0"/>
+					</VBox.margin>
+				</PasswordField>
+				<HBox alignment="CENTER" prefHeight="38.0" prefWidth="525.0">
+					<children>
+						<Button fx:id="login" mnemonicParsing="false" onMouseClicked="#playOnClickEvent" text="Login"/>
+						<Button fx:id="noAccount" layoutX="250.0" layoutY="17.0" mnemonicParsing="false"
+						        onMouseClicked="#playOnClickEvent" text="I don't have an account">
+							<HBox.margin>
+								<Insets left="10.0"/>
+							</HBox.margin>
+						</Button>
+					</children>
+				</HBox>
+
+			</children>
+			<cursor>
+				<Cursor fx:constant="DEFAULT"/>
+			</cursor>
+		</VBox>
+		<VBox fx:id="registerBox" alignment="CENTER" layoutX="-1.0" layoutY="79.0" maxWidth="1.7976931348623157E308"
+		      minHeight="-Infinity" minWidth="-Infinity" prefHeight="191.0" prefWidth="525.0" visible="false">
+			<children>
+				<TextField fx:id="regUsername" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+				           minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="257.0"
+				           promptText="Username">
+					<VBox.margin>
+						<Insets left="50.0" right="50.0"/>
+					</VBox.margin>
+				</TextField>
+				<PasswordField fx:id="password1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+				               prefHeight="25.0" prefWidth="257.0" promptText="Password">
+					<VBox.margin>
+						<Insets top="10.0"/>
+					</VBox.margin>
+				</PasswordField>
+				<PasswordField fx:id="password2" alignment="CENTER" layoutX="144.0" layoutY="149.0"
+				               maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="257.0"
+				               promptText="Password">
+					<VBox.margin>
+						<Insets top="10.0"/>
+					</VBox.margin>
+				</PasswordField>
+				<Button fx:id="register" mnemonicParsing="false" onAction="#register" text="Register">
+					<VBox.margin>
+						<Insets top="10.0"/>
+					</VBox.margin>
+				</Button>
+			</children>
+			<cursor>
+				<Cursor fx:constant="DEFAULT"/>
+			</cursor>
+		</VBox>
+		<Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false"
+		        onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Back"/>
+		<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="24.0"
+		       prefHeight="38.0" prefWidth="178.0" stylesheets="@style.css" text="Account" textAlignment="CENTER">
+			<font>
+				<Font size="24.0"/>
+			</font>
+			<textFill>
+				<LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+					<stops>
+						<Stop>
+							<color>
+								<Color/>
+							</color>
+						</Stop>
+						<Stop offset="0.007662835249042145">
+							<color>
+								<Color red="0.4868420958518982" green="0.04733186960220337" blue="0.04733186960220337"/>
+							</color>
+						</Stop>
+						<Stop offset="1.0">
+							<color>
+								<Color red="1.0"/>
+							</color>
+						</Stop>
+					</stops>
+				</LinearGradient>
+			</textFill>
+			<cursor>
+				<Cursor fx:constant="HAND"/>
+			</cursor>
+			<effect>
+				<Lighting>
+					<bumpInput>
+						<Shadow/>
+					</bumpInput>
+					<light>
+						<Light.Distant/>
+					</light>
+				</Lighting>
+			</effect>
+		</Label>
+	</children>
+</AnchorPane>

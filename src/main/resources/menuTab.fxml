@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.effect.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.*?>
-<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
     <!--   <columnConstraints>-->
     <!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
     <!--   </columnConstraints>-->
@@ -150,7 +155,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="accountTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
+                <Label fx:id="loginTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
