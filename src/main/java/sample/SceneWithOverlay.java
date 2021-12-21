@@ -29,6 +29,10 @@ public class SceneWithOverlay implements Overlay {
 
 	}
 
+	public NotifOverlay getOverlay() {
+		return overlay;
+	}
+
 	public Scene getRootScene() {
 		return rootScene;
 	}
@@ -47,7 +51,7 @@ public class SceneWithOverlay implements Overlay {
 		System.out.println("Message: " + message);
 		Launcher.getFirstStage().show();
 		System.out.println(stackPane.getChildren());
-		overlay.showMessage(message, timeout);
+		overlay.showMessage("n", message, timeout);
 	}
 
 	public StackPane getStackPane() {

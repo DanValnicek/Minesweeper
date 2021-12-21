@@ -24,7 +24,7 @@ public class Menu extends AppSubScene {
 ////					new javafx.scene.SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettingsTab.fxml"))), 525, 269);
 //					break;
 //				case "accountButton":
-//					new javafx.scene.SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/accountTab.fxml"))), 525, 269);
+//					new javafx.scene.SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/loginTab.fxml"))), 525, 269);
 //					break;
 //				case "howToPlayButton":
 //					break;

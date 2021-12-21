@@ -1,10 +1,13 @@
 servercomm\Client.class
 sample\SceneWithOverlay.class
+sample\JsonGenerator.class
 servercomm\ChatClientInitializer.class
+sample\loginTab.class
 sample\GameBar.class
 servercomm\ChatClientHandler.class
 sample\Main.class
 sample\Square.class
+sample\accountTablController.class
 sample\GameSettings.class
 sample\NotifOverlay.class
 sample\SceneInterface.class
@@ -14,5 +17,5 @@ sample\AppSubScene.class
 sample\Overlay.class
 sample\Menu.class
 sample\Game.class
+servercomm\JsonMessageHandler.class
 sample\MapGenerator.class
-sample\accountTab.class
