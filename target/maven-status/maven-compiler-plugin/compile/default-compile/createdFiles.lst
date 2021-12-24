@@ -16,6 +16,7 @@ sample\NotifOverlay$1.class
 sample\AppSubScene.class
 sample\Overlay.class
 sample\Menu.class
+servercomm\MessageTypes.class
 sample\Game.class
 servercomm\JsonMessageHandler.class
 sample\MapGenerator.class
