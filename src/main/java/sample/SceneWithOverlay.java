@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
+import servercomm.MessageTypes;
 
 import java.io.IOException;
 
@@ -51,7 +52,7 @@ public class SceneWithOverlay implements Overlay {
 		System.out.println("Message: " + message);
 		Launcher.getFirstStage().show();
 		System.out.println(stackPane.getChildren());
-		overlay.showMessage("n", message, timeout);
+		overlay.showMessage(MessageTypes.n, message, timeout);
 	}
 
 	public StackPane getStackPane() {

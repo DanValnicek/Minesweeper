@@ -12,15 +12,19 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import servercomm.MessageTypes;
 
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static servercomm.MessageTypes.e;
+import static servercomm.MessageTypes.n;
+
 public class NotifOverlay {
-	static Map<String, String> messageTypeColors = Map.of(
-			"e", "#ff0000",
-			"n", "#ffffff");
+	static Map<MessageTypes, String> messageTypeColors = Map.of(
+			e, "#ff0000",
+			n, "#ffffff");
 	private final Label notifText = new Label();
 	private final Tooltip notifTooltip = new Tooltip();
 	Pane pane = new Pane(notifText);
@@ -48,7 +52,7 @@ public class NotifOverlay {
 		return group;
 	}
 
-	public void showMessage(String messageType, String message, int timeout) {
+	public void showMessage(MessageTypes messageType, String message, int timeout) {
 		Platform.runLater(() -> {
 //			System.out.println("from showMessage: " + message);
 			notifText.setText(message);

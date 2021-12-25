@@ -12,7 +12,7 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 	protected void channelRead0(ChannelHandlerContext channelHandlerContext, String in) throws Exception {
 		System.out.println("Server: " + in);
 		JsonMessageHandler messageHandler = new JsonMessageHandler((JSONObject) new JSONParser().parse(in));
-		messageHandler.showNotification();
+		messageHandler.resolveCallback();
 		ReferenceCountUtil.release(in);
 	}
 

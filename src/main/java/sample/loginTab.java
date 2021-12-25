@@ -11,9 +11,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.json.simple.JSONObject;
+import servercomm.MessageTypes;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public class loginTab extends AppSubScene {
 	private static Scene accountScene;
@@ -67,12 +68,20 @@ public class loginTab extends AppSubScene {
 		}
 	}
 
+	public static void resolveLoginCallback(String callback) throws IOException {
+		if (callback.equals("qLogin-success")) {
+			AppSubScene.init("/accountTab.fxml");
+		} else {
+			Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Username or password is incorrect!", 10);
+		}
+	}
+
 	@FXML
 	private void login() throws InterruptedException {
 		System.out.println(usernameField.getText());
 		System.out.println(passwordField.getText());
 		if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
-			Main.client.sendMessage(JsonGenerator.generateRequest("qLogin",List.of(passwordField.getText(),usernameField.getText())).toJSONString());
+			Main.client.sendMessage(JsonGenerator.generateRequest("qLogin", List.of(passwordField.getText(), usernameField.getText())).toJSONString());
 		}
 	}
 
@@ -81,21 +90,13 @@ public class loginTab extends AppSubScene {
 		if (!regUsername.getText().equals("") && !password1.getText().equals("")) {
 			if (password1.getText().equals(password2.getText())) {
 				JSONObject message = JsonGenerator.generateRequest("uRegister", List.of(regUsername.getText(), password2.getText()));
-//			message.put("operation", "uRegister");
-//			message.put("args",List.of(regUsername.getText(),password2.getText()));
-////			message.put(0, regUsername.getText());
-////			message.put(1, password1.getText());
-//			System.out.println(message.toJSONString());
-//			System.out.println(message.get("args"));
 				Main.client.sendMessage(message.toJSONString());
 				System.out.println("register");
 			} else {
-				Launcher.getMenuScene().getOverlay().showMessage("e", "Passwords don't match!", 10);
+				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Passwords don't match!", 10);
 			}
 		} else {
-			Launcher.getMenuScene().getOverlay().showMessage("e", "Fields are blank!", 10);
+			Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Fields are blank!", 10);
 		}
 	}
-
-
 }
