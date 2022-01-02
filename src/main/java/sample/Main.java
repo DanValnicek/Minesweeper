@@ -10,20 +10,23 @@ import java.util.concurrent.CompletableFuture;
 public class Main extends Application {
 	public static Image flag;
 	public static Image mine;
-
 	public static Client client;
 	public NotifOverlay overlayController;
+	static ConfigurationHandler configurationHandler;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-
+	public static ConfigurationHandler getConfigurationHandler() {
+		return configurationHandler;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		flag = new Image(getClass().getResource("/MonkaS.gif").toExternalForm(), true);
 		mine = new Image(getClass().getResource("/jebaited.png").toExternalForm(), true);
+		configurationHandler = new ConfigurationHandler();
 		CompletableFuture.runAsync(() -> {
 					if (client == null) {
 						try {
@@ -37,5 +40,4 @@ public class Main extends Application {
 		);
 		Launcher.start(primaryStage, new SceneWithOverlay("/menuTab.fxml"));
 	}
-
 }

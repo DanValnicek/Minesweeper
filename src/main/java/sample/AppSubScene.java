@@ -34,6 +34,7 @@ public abstract class AppSubScene {
 		scene = new SubScene(FXMLLoader.load(Objects.requireNonNull(getResource(fxml))), 525, 269);
 		scene.setViewOrder(1);
 		rotateBackground();
+		System.out.println(scene);
 		return scene;
 	}
 

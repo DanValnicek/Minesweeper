@@ -9,6 +9,7 @@ public class Launcher {
 	private static Stage firstStage;
 	private static SceneWithOverlay menuScene;
 
+
 	public static SceneWithOverlay getMenuScene() {
 		return menuScene;
 	}
@@ -18,7 +19,7 @@ public class Launcher {
 	}
 
 	public static void start(Stage primaryStage, SceneWithOverlay sceneWithOverlay) {
-		firstStage = primaryStage;
+			firstStage = primaryStage;
 		menuScene = sceneWithOverlay;
 		sceneWithOverlay.getRootScene().getStylesheets().add("/style.css");
 		primaryStage.setScene(sceneWithOverlay.getRootScene());
@@ -38,7 +39,7 @@ public class Launcher {
 
 	public static void sceneSwitch(Node subScene) throws IOException {
 		menuScene.setSubScene(subScene);
-		menuScene.displayMessage("idk",5);
+		menuScene.displayMessage("idk", 5);
 	}
 
 	public static void sceneSwitch(Node subScene, boolean resizable, double minWidth, double minHeight, boolean resize) {
