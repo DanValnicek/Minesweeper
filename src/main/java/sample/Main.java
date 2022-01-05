@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.commons.configuration.ConfigurationException;
 import servercomm.Client;
 
 import java.util.concurrent.CompletableFuture;
@@ -11,8 +12,8 @@ public class Main extends Application {
 	public static Image flag;
 	public static Image mine;
 	public static Client client;
-	public NotifOverlay overlayController;
 	static ConfigurationHandler configurationHandler;
+	public NotifOverlay overlayController;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -20,6 +21,19 @@ public class Main extends Application {
 
 	public static ConfigurationHandler getConfigurationHandler() {
 		return configurationHandler;
+	}
+
+	public static void saveConfig() throws ConfigurationException {
+		System.out.println(new Exception().getStackTrace()[0].getLineNumber());
+		System.out.println(configurationHandler.getConfiguration().toString());
+
+		try {
+			configurationHandler.getConfiguration().save();
+		} catch (ConfigurationException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+//		System.out.println(configurationHandler.getBuilder().);
 	}
 
 	@Override

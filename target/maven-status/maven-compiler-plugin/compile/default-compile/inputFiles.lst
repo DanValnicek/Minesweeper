@@ -1,21 +1,22 @@
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\GameSettings.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Launcher.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\SceneInterface.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Square.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\AppSubScene.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\SceneWithOverlay.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\servercomm\MessageTypes.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\servercomm\Client.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\NotifOverlay.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Game.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Overlay.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\servercomm\ChatClientInitializer.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\servercomm\JsonMessageHandler.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Main.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\Menu.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\servercomm\ChatClientHandler.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\GameBar.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\accountTabController.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\loginTab.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\JsonGenerator.java
-C:\Users\danva\IdeaProjects\Minesweeper\src\main\java\sample\MapGenerator.java
+D:\Java projects\Minesweeper\src\main\java\sample\Square.java
+D:\Java projects\Minesweeper\src\main\java\sample\Launcher.java
+D:\Java projects\Minesweeper\src\main\java\servercomm\ChatClientHandler.java
+D:\Java projects\Minesweeper\src\main\java\sample\GameSettings.java
+D:\Java projects\Minesweeper\src\main\java\servercomm\JsonMessageHandler.java
+D:\Java projects\Minesweeper\src\main\java\sample\Main.java
+D:\Java projects\Minesweeper\src\main\java\sample\Overlay.java
+D:\Java projects\Minesweeper\src\main\java\sample\AppSubScene.java
+D:\Java projects\Minesweeper\src\main\java\sample\JsonGenerator.java
+D:\Java projects\Minesweeper\src\main\java\sample\loginTab.java
+D:\Java projects\Minesweeper\src\main\java\sample\accountTabController.java
+D:\Java projects\Minesweeper\src\main\java\servercomm\Client.java
+D:\Java projects\Minesweeper\src\main\java\sample\ConfigurationHandler.java
+D:\Java projects\Minesweeper\src\main\java\servercomm\ChatClientInitializer.java
+D:\Java projects\Minesweeper\src\main\java\sample\MapGenerator.java
+D:\Java projects\Minesweeper\src\main\java\sample\SceneInterface.java
+D:\Java projects\Minesweeper\src\main\java\sample\SceneWithOverlay.java
+D:\Java projects\Minesweeper\src\main\java\sample\Menu.java
+D:\Java projects\Minesweeper\src\main\java\sample\NotifOverlay.java
+D:\Java projects\Minesweeper\src\main\java\sample\Game.java
+D:\Java projects\Minesweeper\src\main\java\sample\GameBar.java
+D:\Java projects\Minesweeper\src\main\java\servercomm\MessageTypes.java

@@ -11,7 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationException;
 import org.json.simple.JSONObject;
 import servercomm.MessageTypes;
 
@@ -39,7 +39,7 @@ public class loginTab extends AppSubScene implements Initializable {
 
 	public static void resolveLoginCallback(String callback) throws IOException, ConfigurationException {
 		if (callback.equals("qLogin-success")) {
-			Main.getConfigurationHandler().getBuilder().save();
+//			Main.saveConfig();
 			Platform.runLater(() -> {
 				try {
 					Launcher.sceneSwitch(init("/accountTab.fxml"));
@@ -92,8 +92,13 @@ public class loginTab extends AppSubScene implements Initializable {
 		System.out.println(passwordField.getText());
 		if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
 			Main.client.sendMessage(JsonGenerator.generateRequest("qLogin", List.of(passwordField.getText(), usernameField.getText())).toJSONString());
-			Main.getConfiguration().setProperty("username", usernameField.getText());
-			Main.getConfiguration().setProperty("password", passwordField.getText());
+			Main.getConfigurationHandler().getConfiguration().setProperty("username", usernameField.getText());
+			Main.getConfigurationHandler().getConfiguration().setProperty("password", passwordField.getText());
+			try {
+				Main.saveConfig();
+			} catch (ConfigurationException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -115,8 +120,8 @@ public class loginTab extends AppSubScene implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		usernameField.setText(ConfigurationHandler.getConfiguration().getString("username"));
-		passwordField.setText(ConfigurationHandler.getConfiguration().getString("password"));
+		usernameField.setText(Main.getConfigurationHandler().getConfiguration().getString("username"));
+		passwordField.setText(Main.getConfigurationHandler().getConfiguration().getString("password"));
 
 	}
 }

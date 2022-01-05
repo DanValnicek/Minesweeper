@@ -1,34 +1,30 @@
 package sample;
 
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.FileBasedConfiguration;
-import org.apache.commons.configuration2.PropertiesConfiguration;
-import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+
+import java.io.File;
 
 public class ConfigurationHandler {
 
-	private FileBasedConfigurationBuilder<FileBasedConfiguration> builder;
-	private static Configuration configuration;
-	ConfigurationHandler() {
-		org.apache.commons.configuration2.builder.fluent.Parameters params = new org.apache.commons.configuration2.builder.fluent.Parameters();
-		builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-				.configure(params.properties()
-						.setFileName("gui.properties"));
+	public PropertiesConfiguration config;
+
+
+	public ConfigurationHandler() throws ConfigurationException {
 		try {
-			configuration = builder.getConfiguration();
-			System.out.println(configuration);
-		} catch (
-				ConfigurationException e) {
-			e.printStackTrace();
+			File file = new File("gui.properties");
+			config = new PropertiesConfiguration(file);
+			System.out.println(file.getAbsolutePath());
+			// config contains all properties read from the file
+		} catch (ConfigurationException cex) {
+			System.err.println(cex.getStackTrace());
+			// loading of the configuration file failed
 		}
+
 	}
 
-	public FileBasedConfigurationBuilder<FileBasedConfiguration> getBuilder() {
-		return builder;
+	public PropertiesConfiguration getConfiguration() {
+		return this.config;
 	}
 
-	public static Configuration getConfiguration() {
-		return configuration;
-	}
 }

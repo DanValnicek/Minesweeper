@@ -1,6 +1,6 @@
 package servercomm;
 
-import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import sample.Launcher;
@@ -43,13 +43,13 @@ public class JsonMessageHandler {
 		if (messageType.equals(q)) {
 			if (message.startsWith("qLogin")) {
 				try {
-				loginTab.resolveLoginCallback(message);
+					loginTab.resolveLoginCallback(message);
 				} catch (IOException | ConfigurationException ex) {
 					ex.printStackTrace();
 				}
 			}
 		} else if (messageType.equals(i)) {
-			if(message.startsWith("uRegister")){
+			if (message.startsWith("uRegister")) {
 
 			}
 		} else if (messageType.equals(e) || messageType.equals(n)) {

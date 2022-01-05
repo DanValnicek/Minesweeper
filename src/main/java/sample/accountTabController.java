@@ -1,10 +1,31 @@
 package sample;
 
-import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
-public class accountTabController extends AppSubScene {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class accountTabController extends AppSubScene implements Initializable {
+	@FXML
+	Label usernameLabel;
+	@FXML
+	Label logOutLabel;
 
 	public static void init() throws IOException {
 		init("/resources/accountTab.fxml");
+
+	}
+
+	public void playOnClickEvent(MouseEvent event) {
+
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		usernameLabel.setText("Logged in as " + Main.getConfigurationHandler().getConfiguration().getString("username"));
 	}
 }

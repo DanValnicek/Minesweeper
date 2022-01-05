@@ -91,10 +91,10 @@
                 </Label>
                 <Label fx:id="gameSettingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="19.0" />
                     </font>
                     <padding>
-                        <Insets bottom="5.0" top="10.0" />
+                        <Insets bottom="6.0" top="10.0" />
                     </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
