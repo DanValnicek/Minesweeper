@@ -5,7 +5,9 @@ public enum MessageTypes {
 	n("#ffffff"), //=> notification
 	q("#"), //=> query
 	i("#"),
+	g("#"),
 	; //=> internal
+
 
 	MessageTypes(String s) {
 

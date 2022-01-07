@@ -53,6 +53,9 @@ public class JsonMessageHandler {
 
 			}
 		} else if (messageType.equals(e) || messageType.equals(n)) {
+			if (messageType.equals(e) && message.startsWith("java.sql")){
+				message = message.split(": ")[1];
+			}
 			Launcher.getMenuScene().getOverlay().showMessage(messageType, message, 30);
 		}
 	}

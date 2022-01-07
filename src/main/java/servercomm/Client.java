@@ -6,6 +6,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import sample.JsonGenerator;
+import sample.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,6 +44,7 @@ public class Client {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			lastWriteFuture = null;
+			lastWriteFuture.channel().writeAndFlush(JsonGenerator.generateRequest("iConnect", Main.getConfigurationHandler().getConfiguration().getString("username")));
 			while (true) {
 				String line = in.readLine();
 				if (line == null) {

@@ -20,4 +20,5 @@ servercomm\MessageTypes.class
 sample\ConfigurationHandler.class
 sample\Game.class
 servercomm\JsonMessageHandler.class
+sample\MultiplayerGame.class
 sample\MapGenerator.class

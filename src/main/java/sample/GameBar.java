@@ -57,8 +57,6 @@ public class GameBar {
 		anchorPane.getChildren().addAll(mineCount, timer, reset, backButton);
 	}
 
-	//TODO: finish gamebar
-
 	public void setTimer(long currentTime) {
 		timer.setText(currentTime / 60 + ((currentTime % 60) < 10 ? ":0" : ":") + currentTime % 60);
 	}
