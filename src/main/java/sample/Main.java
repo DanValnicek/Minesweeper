@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.commons.configuration.ConfigurationException;
@@ -22,7 +24,10 @@ public class Main extends Application {
 	public static ConfigurationHandler getConfigurationHandler() {
 		return configurationHandler;
 	}
+@FXML
+public void exitApplication(ActionEvent event){
 
+}
 	public static void saveConfig() throws ConfigurationException {
 		System.out.println(new Exception().getStackTrace()[0].getLineNumber());
 		System.out.println(configurationHandler.getConfiguration().toString());

@@ -2,6 +2,7 @@ servercomm\Client.class
 sample\SceneWithOverlay.class
 sample\JsonGenerator.class
 servercomm\ChatClientInitializer.class
+servercomm\GameMessageTypes.class
 sample\loginTab.class
 sample\GameBar.class
 servercomm\ChatClientHandler.class

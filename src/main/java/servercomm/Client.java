@@ -7,11 +7,13 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import sample.JsonGenerator;
+import sample.Launcher;
 import sample.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Client {
 
@@ -44,17 +46,23 @@ public class Client {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			lastWriteFuture = null;
-			lastWriteFuture.channel().writeAndFlush(JsonGenerator.generateRequest("iConnect", Main.getConfigurationHandler().getConfiguration().getString("username")));
-			while (true) {
-				String line = in.readLine();
-				if (line == null) {
-					break;
-				}
-				lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
-				if ("bye".equalsIgnoreCase(line)) {
-					channel.channel().closeFuture().sync();
-					break;
-				}
+//			while (true) {
+//				String line = in.readLine();
+//				if (line == null) {
+//					break;
+//				}
+//				lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
+//				if ("bye".equalsIgnoreCase(line)) {
+//					channel.channel().closeFuture().sync();
+//					break;
+//				}
+//			}
+			if (!Main.getConfigurationHandler().getConfiguration().getString("username").isEmpty() && !Main.getConfigurationHandler().getConfiguration().getString("password").isEmpty()) {
+				sendMessage(JsonGenerator.generateRequest("iConnect", List.of(
+						Main.getConfigurationHandler().getConfiguration().getString("username"),
+						Main.getConfigurationHandler().getConfiguration().getString("password"))).toJSONString());
+			} else {
+				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Login please", 30);
 			}
 			if (lastWriteFuture != null) {
 				lastWriteFuture.sync();
@@ -65,6 +73,10 @@ public class Client {
 			group.shutdownGracefully();
 		}
 
+	}
+
+	public void disconnect() {
+		channel.channel().disconnect();
 	}
 
 	public void sendMessage(String message) throws InterruptedException {

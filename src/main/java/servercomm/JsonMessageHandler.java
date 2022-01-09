@@ -36,12 +36,11 @@ public class JsonMessageHandler {
 		} else {
 			System.out.println(messageType + ": " + message);
 		}
-
 	}
 
-	public void resolveCallback() throws IOException {
+	public void resolveCallback() {
 		if (messageType.equals(q)) {
-			if (message.startsWith("qLogin")) {
+			if (message.startsWith("qConnect")) {
 				try {
 					loginTab.resolveLoginCallback(message);
 				} catch (IOException | ConfigurationException ex) {

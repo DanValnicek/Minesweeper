@@ -19,7 +19,7 @@ public class Launcher {
 	}
 
 	public static void start(Stage primaryStage, SceneWithOverlay sceneWithOverlay) {
-			firstStage = primaryStage;
+		firstStage = primaryStage;
 		menuScene = sceneWithOverlay;
 		sceneWithOverlay.getRootScene().getStylesheets().add("/style.css");
 		primaryStage.setScene(sceneWithOverlay.getRootScene());
@@ -27,6 +27,10 @@ public class Launcher {
 		primaryStage.show();
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Minesweeper");
+		primaryStage.setOnCloseRequest((windowEvent -> {
+			Main.client.disconnect();
+			System.exit(0);
+		}));
 	}
 
 	public static void newScene(String scenePath) throws IOException {

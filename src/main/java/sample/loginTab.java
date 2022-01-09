@@ -91,7 +91,7 @@ public class loginTab extends AppSubScene implements Initializable {
 		System.out.println(usernameField.getText());
 		System.out.println(passwordField.getText());
 		if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
-			Main.client.sendMessage(JsonGenerator.generateRequest("qLogin", List.of(passwordField.getText(), usernameField.getText())).toJSONString());
+			Main.client.sendMessage(JsonGenerator.generateRequest("iConnect", List.of( usernameField.getText(),passwordField.getText())).toJSONString());
 			Main.getConfigurationHandler().getConfiguration().setProperty("username", usernameField.getText());
 			Main.getConfigurationHandler().getConfiguration().setProperty("password", passwordField.getText());
 			try {

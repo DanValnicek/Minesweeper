@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="workServ@165.22.76.230:22" type="ssh/sftp">
+        <config>
+          <option name="projectRootOnTarget" value="/home/workServ/Minesweeper" />
+          <option name="serverName" value="workServ@165.22.76.230:22 agent" />
+        </config>
+        <ContributedStateBase type="MavenRuntime">
+          <config>
+            <option name="homePath" value="/usr/share/maven" />
+            <option name="versionString" value="[1mApache Maven 3.6.3[m" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
