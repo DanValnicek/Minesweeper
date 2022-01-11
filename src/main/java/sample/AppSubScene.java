@@ -4,7 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.SubScene;
@@ -21,15 +20,6 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
 public abstract class AppSubScene {
 
 	private static javafx.scene.SubScene scene;
-@FXML
-public void exitApplication(ActionEvent event){
-	Main.client.disconnect();
-	Platform.exit();
-}
-public void stop(){
-	System.out.println("disconnecting");
-	Main.client.disconnect();
-}
 	public static void rotateBackground() {
 		Circle background = (Circle) scene.lookup("#background");
 		RotateTransition rotateTransition = new RotateTransition(Duration.millis(30000), background);

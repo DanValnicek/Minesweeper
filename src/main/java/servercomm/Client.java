@@ -45,18 +45,6 @@ public class Client {
 			channel = bootstrap.connect(host, port).sync();
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			lastWriteFuture = null;
-//			while (true) {
-//				String line = in.readLine();
-//				if (line == null) {
-//					break;
-//				}
-//				lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
-//				if ("bye".equalsIgnoreCase(line)) {
-//					channel.channel().closeFuture().sync();
-//					break;
-//				}
-//			}
 			if (!Main.getConfigurationHandler().getConfiguration().getString("username").isEmpty() && !Main.getConfigurationHandler().getConfiguration().getString("password").isEmpty()) {
 				sendMessage(JsonGenerator.generateRequest("iConnect", List.of(
 						Main.getConfigurationHandler().getConfiguration().getString("username"),
@@ -64,9 +52,13 @@ public class Client {
 			} else {
 				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Login please", 30);
 			}
-			if (lastWriteFuture != null) {
-				lastWriteFuture.sync();
+			lastWriteFuture = null;
+			while (!lastWriteFuture.isCancelled()) {
+				if (lastWriteFuture != null) {
+					lastWriteFuture.sync();
+				}
 			}
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
@@ -76,6 +68,7 @@ public class Client {
 	}
 
 	public void disconnect() {
+		System.out.println("disconnecting");
 		channel.channel().disconnect();
 	}
 

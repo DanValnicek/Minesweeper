@@ -6,18 +6,22 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import lombok.Getter;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Game {
-	static int numOfMines;
-	static int numOfRows;
-	static int numOfColumns;
-	static Timeline timeline;
-	static Square[][] squares;
+	private static final AudioClip explosionSound = new AudioClip(new File(Main.getConfigurationHandler().getConfiguration().getString("explosion_effect_path")).toURI().toString());
+	private static final AudioClip defuseSound = new AudioClip(new File(Main.getConfigurationHandler().getConfiguration().getString("defusion_effect_path")).toURI().toString());
 	static boolean isRunning = false;
+	private @Getter
+	static int numOfMines;
+	private static int numOfRows;
+	private static int numOfColumns;
 	public GridPane gridPane;
 	VBox root = new VBox();
 	int numOfMarked;
@@ -27,6 +31,9 @@ public class Game {
 	long startTime;
 	int[] minePositions;
 	int emptySquares;
+	private static Timeline timeline;
+	private @Getter
+	static Square[][] squares;
 
 	public Game(int numOfMines, int numOfRows, int numOfColumns, boolean resize) throws IOException {
 
@@ -58,7 +65,8 @@ public class Game {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
-
+		explosionSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
+		defuseSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
 		Launcher.sceneSwitch(root, true, 291, 340, resize);
 	}
 
@@ -104,10 +112,6 @@ public class Game {
 		return gridPane;
 	}
 
-	public Square[][] getSquares() {
-		return squares;
-	}
-
 	public void startGame() {
 		startTime = System.currentTimeMillis();
 		timeline.play();
@@ -123,5 +127,12 @@ public class Game {
 		GameBar.mineCount.setText(Integer.toString(numOfMines - numOfMarked));
 	}
 
+	public static void playDefuseSound() {
+		defuseSound.play();
+	}
+
+	public static void playExplosionSound() {
+		explosionSound.play();
+	}
 }
 

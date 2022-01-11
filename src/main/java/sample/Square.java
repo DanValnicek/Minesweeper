@@ -41,17 +41,19 @@ public class Square {
 		this.popped = true;
 		if (!this.marked) {
 			if (value == 9) {
+				Game.playExplosionSound();
 				game.getGridPane().add(generateText(this.value), x, y);
 				if (Game.isRunning) {
 					rectangle.setFill(Color.RED);
 					Game.isRunning = false;
-					showAllMines(game.getSquares(), true);
+					showAllMines(Game.getSquares(), true);
 					Game.gameOver();
 				}
 				if (!rectangle.getFill().equals(Color.RED)) {
 					game.getGridPane().getChildren().remove(this.rectangle);
 				}
 			} else if (rectangle != null) {
+				Game.playDefuseSound();
 				this.rectangle.setFill(Color.gray(0.4));
 				game.emptySquares--;
 				if (value != 0) {
@@ -74,7 +76,7 @@ public class Square {
 		int numOfMarked = 0;
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				if (x + j < game.getSquares()[y].length && x + j > -1 && y + i < game.getSquares().length && y + i > -1 && game.getSquares()[y + i][x + j].marked) {
+				if (x + j < Game.getSquares()[y].length && x + j > -1 && y + i < Game.getSquares().length && y + i > -1 && Game.getSquares()[y + i][x + j].marked) {
 					numOfMarked++;
 				}
 			}
@@ -102,7 +104,8 @@ public class Square {
 						if (!popped && !marked) {
 							if (value == 9) {
 								rectangle.setFill(Color.RED);
-								showAllMines(Game.squares, true);
+								Game.isRunning = false;
+								showAllMines(Game.getSquares(), true);
 								Game.gameOver();
 							} else {
 								this.setPopped(x, y);
@@ -113,8 +116,8 @@ public class Square {
 								this.popNeighbours(y, x);
 							}
 						}
-					} else if (event.getButton() == MouseButton.SECONDARY && !game.getSquares()[y][x].popped) {
-						if (!game.getGridPane().getChildren().contains(flag) && Game.numOfMines - game.numOfMarked > 0) {
+					} else if (event.getButton() == MouseButton.SECONDARY && !Game.getSquares()[y][x].popped) {
+						if (!game.getGridPane().getChildren().contains(flag) && Game.getNumOfMines() - game.numOfMarked > 0) {
 							game.getGridPane().add(flag, x, y);
 							marked = true;
 							game.setNumOfMarked(true);
@@ -138,8 +141,8 @@ public class Square {
 	private void popNeighbours(int y, int x) {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				if (game.getSquares() != null && y + i < game.getSquares().length && y + i > -1 && x + j < game.getSquares()[y].length && x + j > -1 && !game.getSquares()[y + i][x + j].marked) {
-					game.getSquares()[y + i][x + j].setPopped(x + j, y + i);
+				if (Game.getSquares() != null && y + i < Game.getSquares().length && y + i > -1 && x + j < Game.getSquares()[y].length && x + j > -1 && !Game.getSquares()[y + i][x + j].marked) {
+					Game.getSquares()[y + i][x + j].setPopped(x + j, y + i);
 				}
 			}
 		}

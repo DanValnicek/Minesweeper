@@ -27,10 +27,6 @@ public class Launcher {
 		primaryStage.show();
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Minesweeper");
-		primaryStage.setOnCloseRequest((windowEvent -> {
-			Main.client.disconnect();
-			System.exit(0);
-		}));
 	}
 
 	public static void newScene(String scenePath) throws IOException {

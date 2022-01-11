@@ -18,9 +18,12 @@ public class Main extends Application {
 	public NotifOverlay overlayController;
 
 	public static void main(String[] args) {
+		Runtime.getRuntime().addShutdownHook(new Thread(()->{
+			client.disconnect();
+			System.exit(0);
+		}));
 		launch(args);
 	}
-
 	public static ConfigurationHandler getConfigurationHandler() {
 		return configurationHandler;
 	}
