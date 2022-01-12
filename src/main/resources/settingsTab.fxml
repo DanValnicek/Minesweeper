@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="sample.Menu">
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="sample.SettingsTabController">
 	<!--   <columnConstraints>-->
 	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
 	<!--   </columnConstraints>-->
@@ -40,9 +39,10 @@
 				</LinearGradient>
 			</fill>
 		</Circle>
+		<Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
 		<VBox alignment="CENTER" cache="true" layoutX="5.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="525.0">
 			<children>
-				<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="430.0" stylesheets="@style.css" text="MínovýUpratovač" textAlignment="CENTER">
+				<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="430.0" stylesheets="@style.css" text="Nastavenia" textAlignment="CENTER">
 					<font>
 						<Font size="24.0" />
 					</font>
@@ -84,94 +84,38 @@
 						</Lighting>
 					</effect>
 				</Label>
-				<Label fx:id="gameSettingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
-					<font>
-						<Font size="19.0" />
-					</font>
-					<padding>
-						<Insets bottom="6.0" top="10.0" />
-					</padding>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-					<effect>
-						<Lighting>
-							<bumpInput>
-								<Shadow />
-							</bumpInput>
-							<light>
-								<Light.Distant />
-							</light>
-						</Lighting>
-					</effect>
-					<VBox.margin>
-						<Insets />
-					</VBox.margin>
-				</Label>
-				<Label fx:id="howToPlayButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="How to play" textAlignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-					<padding>
-						<Insets bottom="5.0" top="5.0" />
-					</padding>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-					<effect>
-						<Lighting>
-							<bumpInput>
-								<Shadow />
-							</bumpInput>
-							<light>
-								<Light.Distant />
-							</light>
-						</Lighting>
-					</effect>
-				</Label>
-				<Label fx:id="settingsButton" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Settings" textAlignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-					<padding>
-						<Insets bottom="5.0" top="5.0" />
-					</padding>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-					<effect>
-						<Lighting>
-							<bumpInput>
-								<Shadow />
-							</bumpInput>
-							<light>
-								<Light.Distant />
-							</light>
-						</Lighting>
-					</effect>
-				</Label>
-				<Label fx:id="loginTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
-					<font>
-						<Font size="18.0" />
-					</font>
-					<padding>
-						<Insets bottom="5.0" top="5.0" />
-					</padding>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-					<effect>
-						<Lighting>
-							<bumpInput>
-								<Shadow />
-							</bumpInput>
-							<light>
-								<Light.Distant />
-							</light>
-						</Lighting>
-					</effect>
-				</Label>
-            <ComboBox prefWidth="150.0" promptText="idk" />
+            <HBox prefHeight="100.0" prefWidth="435.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="324.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="136.0" text="Hlasitosť zvukov">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane prefHeight="54.0" prefWidth="260.0">
+                           <children>
+                              <Slider fx:id="volumeSlider" layoutX="30.0" layoutY="7.0" onDragDone="#changeVolume" prefHeight="14.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="7.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="133.0" prefWidth="233.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="136.0" text="Farba polí">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ColorPicker fx:id="tileColorPicker" onAction="#changeTileColor" onDragDone="#changeTileColor">
+                           <value>
+                              <Color red="0.6196078658103943" green="0.6000000238418579" blue="0.6000000238418579" />
+                           </value>
+                        </ColorPicker>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
 
 			</children>
 			<cursor>

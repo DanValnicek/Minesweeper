@@ -12,7 +12,7 @@ public class ConfigurationHandler {
 
 	public ConfigurationHandler() throws ConfigurationException {
 		try {
-			File file = new File("gui.properties");
+			File file = new File("src/main/resources/gui.properties");
 			config = new PropertiesConfiguration(file);
 			System.out.println(file.getAbsolutePath());
 			// config contains all properties read from the file
