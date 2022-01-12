@@ -35,7 +35,7 @@ public class SettingsTabController extends AppSubScene implements Initializable 
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		volumeSlider.setValue(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
+		volumeSlider.setValue(Main.getConfigurationHandler().getConfiguration().getDouble("Volume") * 100);
 		tileColorPicker.setValue(Color.color(Main.getConfigurationHandler().getConfiguration().getDouble("tileColorRed"),
 				Main.getConfigurationHandler().getConfiguration().getDouble("tileColorGreen"),
 				Main.getConfigurationHandler().getConfiguration().getDouble("tileColorBlue")));
