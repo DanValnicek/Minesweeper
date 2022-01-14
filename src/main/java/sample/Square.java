@@ -31,13 +31,11 @@ public class Square {
 		mine.setFitHeight(20);
 		mine.setFitWidth(20);
 		flag.setMouseTransparent(true);
-
 		this.value = value;
 	}
 
 
 	public void setPopped(int x, int y) {
-
 		this.popped = true;
 		if (!this.marked) {
 			if (value == 9) {
@@ -88,21 +86,21 @@ public class Square {
 		rectangle = new Rectangle(0, 0, 25, 25);
 		rectangle.arcHeightProperty().set(4.5d);
 		rectangle.arcWidthProperty().set(4.5d);
-
-		rectangle.setFill(Color.TOMATO);
+		rectangle.setFill(Color.color(Main.getConfigurationHandler().getConfiguration().getDouble("tileColorRed"),
+				Main.getConfigurationHandler().getConfiguration().getDouble("tileColorGreen"),
+				Main.getConfigurationHandler().getConfiguration().getDouble("tileColorBlue")));
 		rectangle.fillProperty();
 		rectangle.setOnMouseClicked(event -> {
-			if (event.getButton() == MouseButton.PRIMARY) {
-						if (!Game.isRunning && value == 0) {
+					if (event.getButton() == MouseButton.PRIMARY) {
+						if (!Game.isRunning && this.value == 0) {
 							game.startGame();
 						} else if (!Game.isRunning) {
 							System.out.println("x:" + x + "y:" + y);
 							game.reGenerateSquares(x, y);
 							game.startGame();
 						}
-
 						if (!popped && !marked) {
-							if (value == 9) {
+							if (this.value == 9) {
 								rectangle.setFill(Color.RED);
 								Game.isRunning = false;
 								showAllMines(Game.getSquares(), true);

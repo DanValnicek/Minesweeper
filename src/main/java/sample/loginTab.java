@@ -109,7 +109,6 @@ public class loginTab extends AppSubScene implements Initializable {
 				JSONObject message = JsonGenerator.generateRequest("uRegister", List.of(regUsername.getText(), password2.getText()));
 				Main.client.sendMessage(message.toJSONString());
 				System.out.println("register");
-
 			} else {
 				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Passwords don't match!", 10);
 			}

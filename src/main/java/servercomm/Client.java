@@ -52,7 +52,7 @@ public class Client {
 			} else {
 				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Login please", 30);
 			}
-			lastWriteFuture = null;
+//			lastWriteFuture.channel().writeAndFlush();
 			while (!lastWriteFuture.isCancelled()) {
 				if (lastWriteFuture != null) {
 					lastWriteFuture.sync();
