@@ -34,6 +34,7 @@ public class GameBar {
 		backButton.setTextFill(Color.RED);
 		backButton.setOnMouseClicked(mouseEvent -> {
 			//				Launcher.newScene("/gameSettingsTab.fxml");
+			Game.isRunning = false;
 			Launcher.previousScene();
 			//				new SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettingsTab.fxml"))),525,269);
 			System.gc();
