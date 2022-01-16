@@ -20,6 +20,7 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
 public abstract class AppSubScene {
 
 	private static javafx.scene.SubScene scene;
+
 	public static void rotateBackground() {
 		Circle background = (Circle) scene.lookup("#background");
 		RotateTransition rotateTransition = new RotateTransition(Duration.millis(30000), background);
@@ -44,6 +45,8 @@ public abstract class AppSubScene {
 			Launcher.sceneSwitch(init("/" + id + ".fxml"));
 		} else if (id.startsWith("back")) {
 			Launcher.previousScene();
+		} else if (id.equals("multiplayerGameTab")) {
+//			MultiplayerGame game = new MultiplayerGame(true);
 		}
 	}
 }

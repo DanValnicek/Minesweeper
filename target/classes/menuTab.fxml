@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="sample.Menu">
+
+<AnchorPane fx:id="menuScreen" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Menu">
     <!--   <columnConstraints>-->
     <!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
     <!--   </columnConstraints>-->
@@ -42,7 +42,7 @@
       </Circle>
         <VBox alignment="CENTER" cache="true" layoutX="5.0" layoutY="22.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="525.0">
             <children>
-                <Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="430.0" stylesheets="@style.css" text="Minesweeper" textAlignment="CENTER">
+                <Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="430.0" stylesheets="@style.css" text="Míny" textAlignment="CENTER">
                     <font>
                         <Font size="24.0" />
                     </font>
@@ -84,7 +84,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="gameSettingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Play" textAlignment="CENTER">
+                <Label fx:id="gameSettingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="hraj" textAlignment="CENTER">
                     <font>
                         <Font size="19.0" />
                     </font>
@@ -108,7 +108,28 @@
                   <Insets />
                </VBox.margin>
                 </Label>
-                <Label fx:id="manualTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="How to play" textAlignment="CENTER">
+            <Label fx:id="multiplayerGameTab" alignment="BOTTOM_CENTER" layoutX="235.0" layoutY="98.0" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="hra pre viac hráčov" textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <padding>
+                  <Insets bottom="6.0" top="10.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+                <Label fx:id="manualTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="pravidlá" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -129,7 +150,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="settingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Settings" textAlignment="CENTER">
+                <Label fx:id="settingsTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="nastavenia" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -150,7 +171,7 @@
                   </Lighting>
                </effect>
                 </Label>
-                <Label fx:id="loginTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="Account" textAlignment="CENTER">
+                <Label fx:id="loginTab" alignment="BOTTOM_CENTER" onMouseClicked="#playOnClickEvent" styleClass="menuButton" text="účet" textAlignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>

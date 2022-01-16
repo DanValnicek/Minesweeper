@@ -67,7 +67,8 @@ public class Game {
 		timeline.setCycleCount(Animation.INDEFINITE);
 		explosionSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
 		defuseSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
-		Launcher.sceneSwitch(root, true, 291, 340, resize);
+
+		Launcher.sceneSwitch(root, true, 277, 329, resize);
 	}
 
 	public static void gameOver() {

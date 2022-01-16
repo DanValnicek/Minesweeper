@@ -6,21 +6,18 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import sample.JsonGenerator;
-import sample.Launcher;
-import sample.Main;
+import lombok.Getter;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
 
 public class Client {
 
 	private final String host;
 	private final int port;
+	@Getter
 	ChannelFuture channel;
 	ChannelFuture lastWriteFuture;
+	EventLoopGroup group;
 
 	public Client(String host, int port) {
 		this.host = host;
@@ -29,47 +26,54 @@ public class Client {
 
 	public static void main(String[] args) throws Exception {
 //        new Client("127.0.0.1", 56850).run();
-		new Client("165.22.76.230", 56850).run();
+		new Client("165.22.76.230", 56850).connect();
 		//server 165.22.76.230
 	}
 
-	public void run() throws IOException {
-		EventLoopGroup group = new NioEventLoopGroup();
+	public void connect() throws IOException {
+		group = new NioEventLoopGroup();
 
 		try {
 			Bootstrap bootstrap = new Bootstrap()
 					.group(group)
 					.option(ChannelOption.SO_KEEPALIVE, true)
+					.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
+					.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
 					.channel(NioSocketChannel.class)
 					.handler(new ChatClientInitializer());
 			channel = bootstrap.connect(host, port).sync();
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			if (!Main.getConfigurationHandler().getConfiguration().getString("username").isEmpty() && !Main.getConfigurationHandler().getConfiguration().getString("password").isEmpty()) {
-				sendMessage(JsonGenerator.generateRequest("iConnect", List.of(
-						Main.getConfigurationHandler().getConfiguration().getString("username"),
-						Main.getConfigurationHandler().getConfiguration().getString("password"))).toJSONString());
-			} else {
-				Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Login please", 30);
-			}
-//			lastWriteFuture.channel().writeAndFlush();
-			while (!lastWriteFuture.isCancelled()) {
-				if (lastWriteFuture != null) {
-					lastWriteFuture.sync();
-				}
-			}
-
+//			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+//			ChannelFuture lastWriteFuture= null;
+//			while (true) {
+//				String line = in.readLine();
+//				if (line == null) {
+//					break;
+//				}
+//				lastWriteFuture = channel.channel().writeAndFlush(line + "\r\n");
+//				if ("bye".equalsIgnoreCase(line)){
+//					channel.channel().closeFuture().sync();
+//					break;
+//				}
+//			}
+//			if(lastWriteFuture != null){
+//				lastWriteFuture.sync();
+//			}
+			channel.channel().closeFuture().sync();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
 			group.shutdownGracefully();
 		}
-
 	}
 
 	public void disconnect() {
 		System.out.println("disconnecting");
+		if (channel.channel() == null) return;
+		channel.channel().writeAndFlush("disconnect");
 		channel.channel().disconnect();
+
+		group.shutdownGracefully();
+
 	}
 
 	public void sendMessage(String message) throws InterruptedException {

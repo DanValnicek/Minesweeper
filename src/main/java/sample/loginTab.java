@@ -38,7 +38,7 @@ public class loginTab extends AppSubScene implements Initializable {
 	private PasswordField password2;
 
 	public static void resolveLoginCallback(String callback) throws IOException, ConfigurationException {
-		if (callback.equals("qLogin-success")) {
+		if (callback.equals("qConnect-success")) {
 //			Main.saveConfig();
 			Platform.runLater(() -> {
 				try {

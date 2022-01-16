@@ -6,6 +6,10 @@ public class MultiplayerGame extends Game{
 	public MultiplayerGame(int numOfMines, int numOfRows, int numOfColumns, boolean resize) throws IOException {
 		super(numOfMines, numOfRows, numOfColumns, resize);
 	}
+//	public MultiplayerGame( boolean resize) throws IOException {
+
+//		super(/*numOfMines, numOfRows, numOfColumns, */ resize);
+//	}
 	//TODO: join method
 	//TODO: leave method
 }

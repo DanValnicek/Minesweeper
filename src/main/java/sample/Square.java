@@ -94,7 +94,7 @@ public class Square {
 					if (event.getButton() == MouseButton.PRIMARY) {
 						if (!Game.isRunning && this.value == 0) {
 							game.startGame();
-						} else if (!Game.isRunning) {
+						} else if (!Game.isRunning&&game.emptySquares>0) {
 							System.out.println("x:" + x + "y:" + y);
 							game.reGenerateSquares(x, y);
 							game.startGame();

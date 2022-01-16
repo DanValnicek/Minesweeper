@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -27,6 +28,12 @@ public class Launcher {
 		primaryStage.show();
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Minesweeper");
+		primaryStage.setOnCloseRequest(windowEvent -> {
+			Main.client.disconnect();
+			System.out.println("Shutting down");
+			Platform.exit();
+			System.exit(0);
+		});
 	}
 
 	public static void newScene(String scenePath) throws IOException {
@@ -48,8 +55,8 @@ public class Launcher {
 			firstStage.setResizable(resizable);
 			firstStage.show();
 			firstStage.sizeToScene();
-			firstStage.setMaxWidth(firstStage.getWidth());
 			firstStage.setMaxHeight(firstStage.getHeight());
+			firstStage.setMaxWidth(firstStage.getWidth());
 			firstStage.setMinHeight(minHeight);
 			firstStage.setMinWidth(minWidth);
 		}

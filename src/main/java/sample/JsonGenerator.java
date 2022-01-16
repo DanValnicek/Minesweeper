@@ -12,4 +12,9 @@ public class JsonGenerator {
 		jsonObject.put("args", args);
 		return jsonObject;
 	}
+	public static JSONObject generateRequest(String operation) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("operation", operation);
+		return jsonObject;
+	}
 }

@@ -17,13 +17,18 @@ public class Main extends Application {
 	static ConfigurationHandler configurationHandler;
 	public NotifOverlay overlayController;
 
+	CompletableFuture<Void> voidCompletableFuture;
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new Thread(()->{
 			client.disconnect();
-			System.exit(0);
+			client = null;
+			System.out.println("Shutting down");
+//			System.exit(0);
+
 		}));
 		launch(args);
 	}
+
 	public static ConfigurationHandler getConfigurationHandler() {
 		return configurationHandler;
 	}
@@ -49,11 +54,11 @@ public void exitApplication(ActionEvent event){
 		flag = new Image(getClass().getResource("/MonkaS.gif").toExternalForm(), true);
 		mine = new Image(getClass().getResource("/jebaited.png").toExternalForm(), true);
 		configurationHandler = new ConfigurationHandler();
-		CompletableFuture.runAsync(() -> {
+		voidCompletableFuture = CompletableFuture.runAsync(() -> {
 					if (client == null) {
 						try {
 							client = new Client("165.22.76.230", 56850);
-							client.run();
+							client.connect();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
