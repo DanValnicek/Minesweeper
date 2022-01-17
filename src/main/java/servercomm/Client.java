@@ -68,11 +68,13 @@ public class Client {
 
 	public void disconnect() {
 		System.out.println("disconnecting");
-		if (channel.channel() == null) return;
-		channel.channel().writeAndFlush("disconnect");
-		channel.channel().disconnect();
-
-		group.shutdownGracefully();
+		try {
+			channel.channel().writeAndFlush("disconnect");
+			channel.channel().disconnect();
+			group.shutdownGracefully();
+		} catch (NullPointerException e) {
+			System.out.println("already disconnected");
+		}
 
 	}
 
