@@ -67,7 +67,9 @@ public class Game {
 		timeline.setCycleCount(Animation.INDEFINITE);
 		explosionSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
 		defuseSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
-
+		System.out.println(scrollPane.getPrefWidth());
+		System.out.println(gridPane.getPrefWidth());
+		System.out.println(root.getPrefWidth());
 		Launcher.sceneSwitch(root, true, 277, 329, resize);
 	}
 
