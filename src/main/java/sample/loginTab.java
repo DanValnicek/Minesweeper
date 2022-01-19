@@ -39,7 +39,8 @@ public class loginTab extends AppSubScene implements Initializable {
 
 	public static void resolveLoginCallback(String callback) throws IOException, ConfigurationException {
 		if (callback.equals("qConnect-success")) {
-//			Main.saveConfig();
+			Main.saveConfig();
+			Main.client.setLoggedIn(true);
 			Platform.runLater(() -> {
 				try {
 					Launcher.sceneSwitch(init("/accountTab.fxml"));
@@ -48,7 +49,7 @@ public class loginTab extends AppSubScene implements Initializable {
 				}
 			});
 		} else {
-			Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Username or password is incorrect!", 10);
+			Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Nesprávne meno alebo heslo!", 10);
 		}
 	}
 
