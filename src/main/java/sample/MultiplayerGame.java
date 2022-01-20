@@ -8,7 +8,7 @@ public class MultiplayerGame extends Game{
 		super(args.get(0),args.get(1),args.get(2),true);
 	}
 
-	public void joinToGame() throws IOException, InterruptedException {
+	public static void joinToGame() throws IOException, InterruptedException {
 		if(!Main.client.isLoggedIn()){
 		Launcher.newScene("/loginTab.fxml");
 		return;

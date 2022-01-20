@@ -39,14 +39,14 @@ public abstract class AppSubScene {
 	}
 
 	@FXML
-	public void playOnClickEvent(MouseEvent event) throws IOException {
+	public void playOnClickEvent(MouseEvent event) throws IOException, InterruptedException {
 		String id = ((Control) event.getSource()).getId();
-		if (id.endsWith("Tab")) {
+		if (id.equals("multiplayerGameTab")) {
+			MultiplayerGame.joinToGame();
+		} else if (id.endsWith("Tab")) {
 			Launcher.sceneSwitch(init("/" + id + ".fxml"));
 		} else if (id.startsWith("back")) {
 			Launcher.previousScene();
-		} else if (id.equals("multiplayerGameTab")) {
-//			MultiplayerGame game = new MultiplayerGame(true);
 		}
 	}
 }

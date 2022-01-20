@@ -20,7 +20,7 @@ public class accountTabController extends AppSubScene implements Initializable {
 
 	}
 
-	public void playOnClickEvent(MouseEvent event) throws IOException {
+	public void playOnClickEvent(MouseEvent event) throws IOException, InterruptedException {
 		super.playOnClickEvent(event);
 
 	}
