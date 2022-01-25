@@ -134,11 +134,7 @@ public class Square {
 	}
 
 	private void gameOver() {
-		if (game instanceof MultiplayerGame) {
-			MultiplayerGame.gameOver();
-		} else {
-			Game.gameOver();
-		}
+		Main.game.gameOver();
 	}
 
 	private void popNeighbours(int y, int x) {

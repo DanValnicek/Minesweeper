@@ -7,11 +7,7 @@ public enum GameMessageTypes {
 	n, //=>notify
 	e, //=>error
 	f,//=>someone finished
-	w;//=> this player won
-
-	//=>finished
-	public void resolveEnum() {
-
-	}
+	w,//=>winner
+	pcc,//=> plyer Count Changed
 
 }

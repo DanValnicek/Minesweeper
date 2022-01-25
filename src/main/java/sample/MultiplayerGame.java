@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class MultiplayerGame extends Game {
-	//	public MultiplayerGame(int[] args) throws IOException {
-////		super(args.get(0),args.get(1),args.get(2),true);
-//		super(args[0], args[1], args[2], true);
-//	}
 	protected static long serverStartTime;
 	Timeline countDown;
 
@@ -45,9 +41,13 @@ public class MultiplayerGame extends Game {
 	}
 
 	@SneakyThrows
-	public static void gameOver() {
-		Game.gameOver();
-		Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap",List.of(Long.toString(serverStartTime))).toJSONString());
+	public void gameOver() {
+		super.gameOver();
+		if (numOfMines - numOfMarked == 0){
+			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(Long.toString(serverStartTime))).toJSONString());
+		}else {
+			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(Long.toString(serverStartTime))).toJSONString());
+		}
 	}
 
 	public void startCountDown(int duration) {
@@ -60,7 +60,7 @@ public class MultiplayerGame extends Game {
 	}
 
 	public void startGame(long serverStartTime) {
-		this.serverStartTime = serverStartTime;
+		MultiplayerGame.serverStartTime = serverStartTime;
 		gridPane.setMouseTransparent(false);
 		super.startGame();
 	}

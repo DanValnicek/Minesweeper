@@ -11,14 +11,14 @@ import java.util.List;
 
 public class MultiplayerGameBar extends GameBar {
 
-	private static Label deathCounter = new Label(("N/A"));
-	private Label userCount = new Label("1");
+	private static final Label deathCounter = new Label(("N/A"));
+	private final Label userCount = new Label("1");
 
 	public MultiplayerGameBar(int bombCount) throws IOException {
 		super(bombCount, false);
 		backButton.setOnMouseClicked(mouseEvent -> {
 			try {
-				Main.client.sendMessage(JsonGenerator.generateRequest("iLeaveGame", List.of(Long.toString(((MultiplayerGame) Main.game).serverStartTime))).toJSONString());
+				Main.client.sendMessage(JsonGenerator.generateRequest("iLeaveGame", List.of(Long.toString(MultiplayerGame.serverStartTime))).toJSONString());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -46,7 +46,7 @@ public class MultiplayerGameBar extends GameBar {
 		deathCounter.setText(currentTime / 60 + ((currentTime % 60) < 10 ? ":0" : ":") + currentTime % 60);
 	}
 
-	public void setUserCount(int userCount) {
-		this.userCount.setText(Integer.toString(userCount));
+	public void setUserCount(int userCounter) {
+		userCount.setText(Integer.toString(userCounter));
 	}
 }

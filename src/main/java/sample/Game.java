@@ -29,7 +29,7 @@ public class Game {
 	VBox root = new VBox();
 	int numOfMarked;
 	int[][] map;
-	GameBar gameBar;
+	@Getter GameBar gameBar;
 	long startTime;
 	int[] minePositions;
 	int emptySquares;
@@ -52,17 +52,17 @@ public class Game {
 	public Game() {
 	}
 
-	public static void gameOver()  {
+	public static void restart() throws IOException {
+		Main.game.gameOver();
+		Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
+	}
+
+	public void gameOver()  {
 		isRunning = false;
 		timeline.stop();
 		squares = null;
 		System.gc();
-	}
-
-	public static void restart() throws IOException {
-		gameOver();
-		Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
 	}
 
 	public static void playDefuseSound() {

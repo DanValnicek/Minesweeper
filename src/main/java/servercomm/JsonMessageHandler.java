@@ -5,14 +5,12 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import sample.Launcher;
-import sample.Main;
-import sample.MultiplayerGame;
-import sample.loginTab;
+import sample.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import static servercomm.MessageTypes.*;
 
@@ -96,7 +94,19 @@ public class JsonMessageHandler {
 				}
 				case w -> {
 					Launcher.getMenuScene().getOverlay().showMessage(n, message.get(0), 10);
-					MultiplayerGame.gameOver();
+					Main.game.gameOver();
+				}
+				case pcc -> {
+					Launcher.getMenuScene().getOverlay().showMessage(n, message.get(0), 10);
+					CompletableFuture.supplyAsync(() -> {
+						while (Main.game.getGameBar() == null) {
+						}
+						Platform.runLater(() -> {
+							((MultiplayerGameBar) Main.game.getGameBar()).setUserCount(
+									Integer.parseInt(message.get(1)));
+						});
+						return null;
+					});
 				}
 			}
 		}
