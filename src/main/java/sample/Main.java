@@ -15,11 +15,12 @@ public class Main extends Application {
 	public static Image mine;
 	public static Client client;
 	static ConfigurationHandler configurationHandler;
+	 public static Game game;
 	public NotifOverlay overlayController;
-
 	CompletableFuture<Void> voidCompletableFuture;
+
 	public static void main(String[] args) {
-		Runtime.getRuntime().addShutdownHook(new Thread(()->{
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			client.disconnect();
 			client = null;
 			System.out.println("Shutting down");
@@ -32,10 +33,7 @@ public class Main extends Application {
 	public static ConfigurationHandler getConfigurationHandler() {
 		return configurationHandler;
 	}
-@FXML
-public void exitApplication(ActionEvent event){
 
-}
 	public static void saveConfig() throws ConfigurationException {
 		System.out.println(new Exception().getStackTrace()[0].getLineNumber());
 		System.out.println(configurationHandler.getConfiguration().toString());
@@ -47,6 +45,11 @@ public void exitApplication(ActionEvent event){
 		}
 		System.out.println();
 //		System.out.println(configurationHandler.getBuilder().);
+	}
+
+	@FXML
+	public void exitApplication(ActionEvent event) {
+
 	}
 
 	@Override

@@ -17,31 +17,65 @@ import java.io.IOException;
 public class Game {
 	private static final AudioClip explosionSound = new AudioClip(new File(Main.getConfigurationHandler().getConfiguration().getString("explosion_effect_path")).toURI().toString());
 	private static final AudioClip defuseSound = new AudioClip(new File(Main.getConfigurationHandler().getConfiguration().getString("defusion_effect_path")).toURI().toString());
-	static boolean isRunning = false;
-	private @Getter
+	protected @Getter
 	static int numOfMines;
-	private static int numOfRows;
-	private static int numOfColumns;
+	protected static int numOfRows;
+	protected static int numOfColumns;
+	protected static Timeline timeline;
+	protected @Getter
+	static Square[][] squares;
+	static boolean isRunning = false;
 	public GridPane gridPane;
 	VBox root = new VBox();
 	int numOfMarked;
 	int[][] map;
-
 	GameBar gameBar;
 	long startTime;
 	int[] minePositions;
 	int emptySquares;
-	private static Timeline timeline;
-	private @Getter
-	static Square[][] squares;
 
 	public Game(int numOfMines, int numOfRows, int numOfColumns, boolean resize) throws IOException {
-
 		Game.numOfMines = numOfMines;
 		Game.numOfRows = numOfRows;
 		Game.numOfColumns = numOfColumns;
 
+		gameBar = new GameBar(numOfMines,true);
+		setupScene();
 		emptySquares = numOfColumns * numOfRows - numOfMines;
+		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, -1, numOfColumns);
+		map = MapGenerator.MapGen(numOfRows, numOfColumns, minePositions);
+		squares = new Square[numOfRows][numOfColumns];
+		generateSquares(squares, numOfColumns, numOfRows, map);
+		Launcher.sceneSwitch(root, true, 277, 329, resize);
+	}
+
+	public Game() {
+	}
+
+	public static void gameOver()  {
+		isRunning = false;
+		timeline.stop();
+		squares = null;
+		System.gc();
+	}
+
+	public static void restart() throws IOException {
+		gameOver();
+		Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
+		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
+	}
+
+	public static void playDefuseSound() {
+		defuseSound.play();
+	}
+
+	public static void playExplosionSound() {
+		explosionSound.play();
+	}
+
+	protected void setupScene() throws IOException {
+		explosionSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
+		defuseSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
 		ScrollPane scrollPane = new ScrollPane();
 		gridPane = new GridPane();
 		scrollPane.setContent(gridPane);
@@ -55,43 +89,18 @@ public class Game {
 		gridPane.setBackground(background);
 		gridPane.setHgap(.5);
 		gridPane.setVgap(.5);
-		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, -1, numOfColumns);
-		map = MapGenerator.MapGen(numOfRows, numOfColumns, minePositions);
-		gameBar = new GameBar(numOfMines);
-		squares = new Square[numOfRows][numOfColumns];
-		generateSquares(squares, numOfColumns, numOfRows, map);
 		root.getChildren().addAll(gameBar.getAnchorPane(), scrollPane);
 		timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			gameBar.setTimer((System.currentTimeMillis() - startTime) / 1000);
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
-		explosionSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
-		defuseSound.setVolume(Main.getConfigurationHandler().getConfiguration().getDouble("Volume"));
-		System.out.println(scrollPane.getPrefWidth());
-		System.out.println(gridPane.getPrefWidth());
-		System.out.println(root.getPrefWidth());
-		Launcher.sceneSwitch(root, true, 277, 329, resize);
-	}
-
-	public static void gameOver() {
-		isRunning = false;
-		timeline.stop();
-		squares = null;
-		System.gc();
-	}
-
-	public static void restart() throws IOException {
-		gameOver();
-		Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
-		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
 	}
 
 	public VBox getRoot() {
 		return root;
 	}
 
-
-	private void generateSquares(Square[][] squares, int numOfColumns, int numOfRows, int[][] map) {
+	protected void generateSquares(Square[][] squares, int numOfColumns, int numOfRows, int[][] map) {
 		for (int y = 0; y < numOfRows; y++) {
 			for (int x = 0; x < numOfColumns; x++) {
 				squares[y][x] = new Square(map[y][x]);
@@ -127,15 +136,7 @@ public class Game {
 		} else {
 			this.numOfMarked--;
 		}
-		GameBar.mineCount.setText(Integer.toString(numOfMines - numOfMarked));
-	}
-
-	public static void playDefuseSound() {
-		defuseSound.play();
-	}
-
-	public static void playExplosionSound() {
-		explosionSound.play();
+		GameBar.setMineCount(numOfMines - numOfMarked);
 	}
 }
 

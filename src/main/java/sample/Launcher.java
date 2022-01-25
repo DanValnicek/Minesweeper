@@ -63,6 +63,8 @@ public class Launcher {
 	}
 
 	public static void previousScene() {
+		System.out.println(Launcher.getFirstStage());
+		System.out.println(menuScene);
 		menuScene.getStackPane().getChildren().remove(menuScene.getStackPane().getChildren().size() - 1);
 		firstStage.setResizable(false);
 		firstStage.show();

@@ -11,7 +11,7 @@ import javafx.scene.text.Font;
 
 import java.util.Arrays;
 
-import static sample.GameSettings.game;
+import static sample.Main.game;
 
 
 public class Square {
@@ -24,7 +24,6 @@ public class Square {
 	Label tileLabel;
 	Rectangle rectangle;
 
-
 	public Square(int value) {
 		flag.setFitHeight(20);
 		flag.setFitWidth(20);
@@ -33,7 +32,6 @@ public class Square {
 		flag.setMouseTransparent(true);
 		this.value = value;
 	}
-
 
 	public void setPopped(int x, int y) {
 		this.popped = true;
@@ -45,7 +43,7 @@ public class Square {
 					rectangle.setFill(Color.RED);
 					Game.isRunning = false;
 					showAllMines(Game.getSquares(), true);
-					Game.gameOver();
+					gameOver();
 				}
 				if (!rectangle.getFill().equals(Color.RED)) {
 					game.getGridPane().getChildren().remove(this.rectangle);
@@ -68,7 +66,6 @@ public class Square {
 			}
 		}
 	}
-
 
 	private int getNumOfMarked(int x, int y) {
 		int numOfMarked = 0;
@@ -94,7 +91,7 @@ public class Square {
 					if (event.getButton() == MouseButton.PRIMARY) {
 						if (!Game.isRunning && this.value == 0) {
 							game.startGame();
-						} else if (!Game.isRunning&&game.emptySquares>0) {
+						} else if (!Game.isRunning && game.emptySquares > 0) {
 							System.out.println("x:" + x + "y:" + y);
 							game.reGenerateSquares(x, y);
 							game.startGame();
@@ -104,7 +101,7 @@ public class Square {
 								rectangle.setFill(Color.RED);
 								Game.isRunning = false;
 								showAllMines(Game.getSquares(), true);
-								Game.gameOver();
+								gameOver();
 							} else {
 								this.setPopped(x, y);
 							}
@@ -128,12 +125,20 @@ public class Square {
 						}
 					}
 					if (game.emptySquares == 0) {
-						Game.gameOver();
+						gameOver();
 					}
 					event.consume();
 
 				}
 		);
+	}
+
+	private void gameOver() {
+		if (game instanceof MultiplayerGame) {
+			MultiplayerGame.gameOver();
+		} else {
+			Game.gameOver();
+		}
 	}
 
 	private void popNeighbours(int y, int x) {

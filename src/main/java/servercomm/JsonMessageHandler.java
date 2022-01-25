@@ -1,6 +1,8 @@
 package servercomm;
 
+import javafx.application.Platform;
 import org.apache.commons.configuration.ConfigurationException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import sample.Launcher;
@@ -9,15 +11,14 @@ import sample.MultiplayerGame;
 import sample.loginTab;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static servercomm.MessageTypes.*;
 
 public class JsonMessageHandler {
 	JSONObject jsonObject;
-	List<String> message;
+	ArrayList<String> message = new ArrayList<>();
 	MessageTypes messageType;
 	GameMessageTypes gameMessageType;
 
@@ -29,15 +30,19 @@ public class JsonMessageHandler {
 		}
 		if (jsonObject.containsKey("gameMessageType")) {
 			gameMessageType = GameMessageTypes.valueOf(jsonObject.get("gameMessageType").toString());
+			if (gameMessageType == GameMessageTypes.p) {
+				return;
+			}
 		}
+		if (!jsonObject.containsKey("message")) return;
 		try {
 			if (messageType != null) {
-				message.set(0, String.join(",\n", (List<String>) jsonObject.get("message")));
+				message.add(0, String.join(",\n", (ArrayList<String>) jsonObject.get("message")));
 			} else if (gameMessageType != null) {
-				message = (List<String>) jsonObject.get("message");
+				message = (ArrayList<String>) jsonObject.get("message");
 			}
 		} catch (Exception e) {
-			message.set(0, jsonObject.get("message").toString());
+			message.add(0, jsonObject.get("message").toString());
 			System.out.println(message);
 		}
 	}
@@ -74,16 +79,24 @@ public class JsonMessageHandler {
 			}
 		} else {
 			switch (gameMessageType) {
-				case s -> {
-				}
-				case p -> new MultiplayerGame(message.stream().map(Integer::valueOf).collect(Collectors.toList()));
-				case t -> {
-				}
-				case n -> {
-				}
-				case e -> {
-				}
+				case s -> ((MultiplayerGame) Main.game).startGame(Long.parseLong(message.get(0)));
+				case p -> Platform.runLater(() -> {
+					try {
+						Main.game = new MultiplayerGame((JSONArray) jsonObject.get("minePositions"), ((Long) jsonObject.get("rowCount")).intValue(), ((Long) jsonObject.get("columnCount")).intValue());
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				});
+				case t -> ((MultiplayerGame) Main.game).eliminated(message.get(0));
+				case n -> Launcher.getMenuScene().getOverlay().showMessage(n, message.get(0), 10);
+				case e -> Launcher.getMenuScene().getOverlay().showMessage(e, message.get(0), 10);
 				case f -> {
+					Launcher.getMenuScene().getOverlay().showMessage(n, message.get(1), 10);
+					((MultiplayerGame) Main.game).startCountDown(Integer.parseInt(message.get(0)));
+				}
+				case w -> {
+					Launcher.getMenuScene().getOverlay().showMessage(n, message.get(0), 10);
+					MultiplayerGame.gameOver();
 				}
 			}
 		}

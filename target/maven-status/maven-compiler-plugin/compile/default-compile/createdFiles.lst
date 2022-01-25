@@ -17,6 +17,7 @@ sample\NotifOverlay$1.class
 sample\AppSubScene.class
 sample\Overlay.class
 sample\Menu.class
+servercomm\JsonMessageHandler$1.class
 servercomm\MessageTypes.class
 sample\ConfigurationHandler.class
 sample\Game.class
@@ -24,3 +25,4 @@ sample\SettingsTabController.class
 servercomm\JsonMessageHandler.class
 sample\MultiplayerGame.class
 sample\MapGenerator.class
+sample\MultiplayerGameBar.class

@@ -8,35 +8,24 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import lombok.Getter;
 
 import java.io.IOException;
 
 public class GameBar {
-	static Label mineCount = new Label();
-	public Label timer = new Label();
-	AnchorPane anchorPane = new AnchorPane();
+	private static Label mineCount = new Label();
+	protected Label backButton;
+	private Label timer = new Label();
+	private @Getter AnchorPane anchorPane = new AnchorPane();
 
-	public GameBar(int bombCount) throws IOException {
-		Label reset = new Label("Reset");
-		reset.setFont(Font.font("Impact", 15));
-		reset.setTextFill(Color.RED);
-		reset.setOnMouseClicked(mouseEvent -> {
-			try {
-				Game.restart();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-		AnchorPane.setTopAnchor(reset, 5.0);
-		AnchorPane.setRightAnchor(reset, 40.0);
-		Label backButton = new Label("Back");
+	public GameBar(int bombCount, boolean resetButton) throws IOException {
+		if (resetButton) generateResetButton();
+		backButton = new Label("Back");
 		backButton.setFont(Font.font("Impact", 15));
 		backButton.setTextFill(Color.RED);
 		backButton.setOnMouseClicked(mouseEvent -> {
-			//				Launcher.newScene("/gameSettingsTab.fxml");
 			Game.isRunning = false;
 			Launcher.previousScene();
-			//				new SubScene(FXMLLoader.load(Objects.requireNonNull(Menu.class.getResource("/gameSettingsTab.fxml"))),525,269);
 			System.gc();
 		});
 		AnchorPane.setTopAnchor(backButton, 5.0);
@@ -55,14 +44,31 @@ public class GameBar {
 		AnchorPane.setRightAnchor(timer, 5.0);
 		AnchorPane.setTopAnchor(timer, 5.0);
 		AnchorPane.setBottomAnchor(timer, 3.0);
-		anchorPane.getChildren().addAll(mineCount, timer, reset, backButton);
+		anchorPane.getChildren().addAll(mineCount, timer, backButton);
+	}
+
+	public static void setMineCount(int mineCount) {
+		GameBar.mineCount.setText(Integer.toString(mineCount));
+	}
+
+	private Label generateResetButton() {
+		Label reset = new Label("Reset");
+		reset.setFont(Font.font("Impact", 15));
+		reset.setTextFill(Color.RED);
+		reset.setOnMouseClicked(mouseEvent -> {
+			try {
+				Game.restart();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		AnchorPane.setTopAnchor(reset, 5.0);
+		AnchorPane.setRightAnchor(reset, 40.0);
+		anchorPane.getChildren().add(reset);
+		return reset;
 	}
 
 	public void setTimer(long currentTime) {
 		timer.setText(currentTime / 60 + ((currentTime % 60) < 10 ? ":0" : ":") + currentTime % 60);
-	}
-
-	public AnchorPane getAnchorPane() {
-		return anchorPane;
 	}
 }

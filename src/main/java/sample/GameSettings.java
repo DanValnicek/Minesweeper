@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
+import static sample.Main.game;
 public class GameSettings extends AppSubScene implements Initializable {
-	static Game game;
+
 	@FXML
 	private Spinner<Integer> percentOfMines;
 	@FXML
