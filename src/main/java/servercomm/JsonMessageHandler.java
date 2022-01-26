@@ -10,6 +10,7 @@ import sample.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static servercomm.MessageTypes.*;
@@ -77,10 +78,10 @@ public class JsonMessageHandler {
 			}
 		} else {
 			switch (gameMessageType) {
-				case s -> ((MultiplayerGame) Main.game).startGame(Long.parseLong(message.get(0)));
+				case s -> ((MultiplayerGame) Main.game).startGame();
 				case p -> Platform.runLater(() -> {
 					try {
-						Main.game = new MultiplayerGame((JSONArray) jsonObject.get("minePositions"), ((Long) jsonObject.get("rowCount")).intValue(), ((Long) jsonObject.get("columnCount")).intValue());
+						Main.game = new MultiplayerGame((JSONArray) jsonObject.get("minePositions"), ((Long) jsonObject.get("rowCount")).intValue(), ((Long) jsonObject.get("columnCount")).intValue(), UUID.fromString(String.valueOf(jsonObject.get("uuid"))));
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}
@@ -101,6 +102,7 @@ public class JsonMessageHandler {
 					CompletableFuture.supplyAsync(() -> {
 						while (Main.game.getGameBar() == null) {
 						}
+						System.out.println(Main.game.getGameBar());
 						Platform.runLater(() -> {
 							((MultiplayerGameBar) Main.game.getGameBar()).setUserCount(
 									Integer.parseInt(message.get(1)));

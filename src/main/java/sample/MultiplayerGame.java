@@ -9,12 +9,15 @@ import servercomm.MessageTypes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public class MultiplayerGame extends Game {
-	protected static long serverStartTime;
+	protected static UUID uuid;
 	Timeline countDown;
 
-	public MultiplayerGame(JSONArray minePositions, int rowCount, int columnCount) throws IOException {
+	@SneakyThrows
+	public MultiplayerGame(JSONArray minePositions, int rowCount, int columnCount, UUID uuid) throws IOException {
+		MultiplayerGame.uuid = uuid;
 		int[] mines = new int[minePositions.size()];
 		for (int i = 0; i < minePositions.size(); i++) {
 			mines[i] = ((Long) minePositions.get(i)).intValue();
@@ -30,6 +33,7 @@ public class MultiplayerGame extends Game {
 		generateSquares(squares, numOfColumns, numOfRows, map);
 		gridPane.setMouseTransparent(true);
 		Launcher.sceneSwitch(root, true, 277, 329, true);
+		Main.client.sendMessage(JsonGenerator.generateRequest("iSendPlayerCount", List.of(uuid)).toJSONString());
 	}
 
 	public static void joinToGame() throws IOException, InterruptedException {
@@ -43,10 +47,10 @@ public class MultiplayerGame extends Game {
 	@SneakyThrows
 	public void gameOver() {
 		super.gameOver();
-		if (numOfMines - numOfMarked == 0){
-			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(Long.toString(serverStartTime))).toJSONString());
-		}else {
-			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(Long.toString(serverStartTime))).toJSONString());
+		if (numOfMines - numOfMarked == 0) {
+			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(uuid)).toJSONString());
+		} else {
+			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(uuid)).toJSONString());
 		}
 	}
 
@@ -59,8 +63,7 @@ public class MultiplayerGame extends Game {
 		countDown.play();
 	}
 
-	public void startGame(long serverStartTime) {
-		MultiplayerGame.serverStartTime = serverStartTime;
+	public void startGame() {
 		gridPane.setMouseTransparent(false);
 		super.startGame();
 	}
