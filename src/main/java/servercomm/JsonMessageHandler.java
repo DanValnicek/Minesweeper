@@ -78,10 +78,13 @@ public class JsonMessageHandler {
 			}
 		} else {
 			switch (gameMessageType) {
-				case s -> ((MultiplayerGame) Main.game).startGame();
+				case s -> Main.game.startGame();
 				case p -> Platform.runLater(() -> {
 					try {
-						Main.game = new MultiplayerGame((JSONArray) jsonObject.get("minePositions"), ((Long) jsonObject.get("rowCount")).intValue(), ((Long) jsonObject.get("columnCount")).intValue(), UUID.fromString(String.valueOf(jsonObject.get("uuid"))));
+						Main.game = new MultiplayerGame((JSONArray) jsonObject.get("minePositions"),
+								((Long) jsonObject.get("rowCount")).intValue(),
+								((Long) jsonObject.get("columnCount")).intValue(),
+								UUID.fromString((String) jsonObject.get("uuid")));
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}

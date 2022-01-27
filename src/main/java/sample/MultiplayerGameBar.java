@@ -18,7 +18,10 @@ public class MultiplayerGameBar extends GameBar {
 		super(bombCount, false);
 		backButton.setOnMouseClicked(mouseEvent -> {
 			try {
-				Main.client.sendMessage(JsonGenerator.generateRequest("iLeaveGame", List.of(MultiplayerGame.uuid)).toJSONString());
+				if (MultiplayerGame.uuid != null) {
+					Main.client.sendMessage(JsonGenerator.generateRequest("iLeaveGame",
+							List.of(MultiplayerGame.uuid.toString())).toJSONString());
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -35,12 +38,17 @@ public class MultiplayerGameBar extends GameBar {
 		AnchorPane.setTopAnchor(deathCounter, 5.0);
 		AnchorPane.setRightAnchor(deathCounter, 60.0);
 		getAnchorPane().getChildren().addAll(deathCounter, userCount);
+		setDeathCounter(-1);
 	}
 
 	public static void setDeathCounter(long currentTime) {
-		if (currentTime < 0) {
-			((MultiplayerGame) Main.game).countDown.stop();
-			deathCounter.setText("N/A");
+		try {
+			if (currentTime < 0) {
+				((MultiplayerGame) Main.game).countDown.stop();
+				deathCounter.setText("N/A");
+				return;
+			}
+		} catch (NullPointerException e) {
 			return;
 		}
 		deathCounter.setText(currentTime / 60 + ((currentTime % 60) < 10 ? ":0" : ":") + currentTime % 60);

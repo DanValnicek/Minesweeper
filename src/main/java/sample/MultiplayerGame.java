@@ -17,6 +17,9 @@ public class MultiplayerGame extends Game {
 
 	@SneakyThrows
 	public MultiplayerGame(JSONArray minePositions, int rowCount, int columnCount, UUID uuid) throws IOException {
+		if (Launcher.getMenuScene().getStackPane().getChildren().size() > 3) {
+			Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
+		}
 		MultiplayerGame.uuid = uuid;
 		int[] mines = new int[minePositions.size()];
 		for (int i = 0; i < minePositions.size(); i++) {
@@ -27,13 +30,14 @@ public class MultiplayerGame extends Game {
 		numOfRows = rowCount;
 		gameBar = new MultiplayerGameBar(numOfMines);
 		setupScene();
+
 		emptySquares = numOfColumns * numOfRows - numOfMines;
 		map = MapGenerator.MapGen(numOfRows, numOfColumns, mines);
 		squares = new Square[numOfRows][numOfColumns];
 		generateSquares(squares, numOfColumns, numOfRows, map);
 		gridPane.setMouseTransparent(true);
 		Launcher.sceneSwitch(root, true, 277, 329, true);
-		Main.client.sendMessage(JsonGenerator.generateRequest("iSendPlayerCount", List.of(uuid)).toJSONString());
+		Main.client.sendMessage(JsonGenerator.generateRequest("iSendPlayerCount", List.of(uuid.toString())).toJSONString());
 	}
 
 	public static void joinToGame() throws IOException, InterruptedException {
@@ -47,11 +51,14 @@ public class MultiplayerGame extends Game {
 	@SneakyThrows
 	public void gameOver() {
 		super.gameOver();
-		if (numOfMines - numOfMarked == 0) {
-			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(uuid)).toJSONString());
+		if (emptySquares == 0) {
+			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(uuid.toString())).toJSONString());
 		} else {
-			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(uuid)).toJSONString());
+			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(uuid.toString())).toJSONString());
 		}
+		gridPane.setMouseTransparent(true);
+			uuid = null;
+		Main.game = null;
 	}
 
 	public void startCountDown(int duration) {
@@ -69,10 +76,11 @@ public class MultiplayerGame extends Game {
 	}
 
 	public void eliminated(String message) {
-		countDown.stop();
+		if (countDown != null) {
+			countDown.stop();
+		}
 		Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.g, message, 10);
 		Game.isRunning = false;
-		Launcher.previousScene();
 		System.gc();
 	}
 
