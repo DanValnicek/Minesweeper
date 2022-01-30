@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class MultiplayerGameBar extends GameBar {
 
@@ -38,7 +39,9 @@ public class MultiplayerGameBar extends GameBar {
 		AnchorPane.setTopAnchor(deathCounter, 5.0);
 		AnchorPane.setRightAnchor(deathCounter, 60.0);
 		getAnchorPane().getChildren().addAll(deathCounter, userCount);
-		setDeathCounter(-1);
+		if (!Objects.equals(deathCounter.getText(), "N/A")) {
+			setDeathCounter(-1);
+		}
 	}
 
 	public static void setDeathCounter(long currentTime) {

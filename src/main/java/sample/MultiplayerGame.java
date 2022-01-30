@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class MultiplayerGame extends Game {
 	protected static UUID uuid;
-	Timeline countDown;
 	public boolean won = false;
+	Timeline countDown;
 
 	@SneakyThrows
 	public MultiplayerGame(JSONArray minePositions, int rowCount, int columnCount, UUID uuid) throws IOException {
@@ -22,9 +22,9 @@ public class MultiplayerGame extends Game {
 			Launcher.getMenuScene().getStackPane().getChildren().remove(Launcher.getMenuScene().getStackPane().getChildren().size() - 1);
 		}
 		MultiplayerGame.uuid = uuid;
-		int[] mines = new int[minePositions.size()];
+		super.minePositions = new int[minePositions.size()];
 		for (int i = 0; i < minePositions.size(); i++) {
-			mines[i] = ((Long) minePositions.get(i)).intValue();
+			super.minePositions[i] = ((Long) minePositions.get(i)).intValue();
 		}
 		numOfMines = minePositions.size();
 		numOfColumns = columnCount;
@@ -33,11 +33,12 @@ public class MultiplayerGame extends Game {
 		setupScene();
 
 		emptySquares = numOfColumns * numOfRows - numOfMines;
-		map = MapGenerator.MapGen(numOfRows, numOfColumns, mines);
+		map = MapGenerator.MapGen(numOfRows, numOfColumns, super.minePositions);
 		squares = new Square[numOfRows][numOfColumns];
 		generateSquares(squares, numOfColumns, numOfRows, map);
 		gridPane.setMouseTransparent(true);
 		Launcher.sceneSwitch(root, true, 277, 329, true);
+		if (numOfRows * numOfColumns == 100) Launcher.getFirstStage().setMaxWidth(277);
 		Main.client.sendMessage(JsonGenerator.generateRequest("iSendPlayerCount", List.of(uuid.toString())).toJSONString());
 	}
 
@@ -61,7 +62,7 @@ public class MultiplayerGame extends Game {
 	}
 
 	public void startCountDown(int duration) {
-		if (duration == 0)return;
+		if (duration == 0) return;
 		long endTime = System.currentTimeMillis() + duration * 1000L;
 		countDown = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			MultiplayerGameBar.setDeathCounter((endTime - System.currentTimeMillis()) / 1000);
@@ -84,6 +85,7 @@ public class MultiplayerGame extends Game {
 		if (countDown != null) {
 			countDown.stop();
 		}
+		System.out.println(message);
 		Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.g, message, 10);
 		Game.isRunning = false;
 		super.gameOver();

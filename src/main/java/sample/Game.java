@@ -13,6 +13,10 @@ import lombok.Getter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Game {
 	private static final AudioClip explosionSound = new AudioClip(new File(Main.getConfigurationHandler().getConfiguration().getString("explosion_effect_path")).toURI().toString());
@@ -39,7 +43,7 @@ public class Game {
 		Game.numOfRows = numOfRows;
 		Game.numOfColumns = numOfColumns;
 
-		gameBar = new GameBar(numOfMines,true);
+		gameBar = new GameBar(numOfMines, true);
 		setupScene();
 		emptySquares = numOfColumns * numOfRows - numOfMines;
 		minePositions = MapGenerator.randMinesGen(numOfRows * numOfColumns, numOfMines, -1, numOfColumns);
@@ -58,19 +62,31 @@ public class Game {
 		GameSettings.newGame(numOfMines, numOfColumns, numOfRows, false);
 	}
 
-	public void gameOver()  {
-		isRunning = false;
-		timeline.stop();
-		squares = null;
-		System.gc();
-	}
-
 	public static void playDefuseSound() {
 		defuseSound.play();
 	}
 
 	public static void playExplosionSound() {
 		explosionSound.play();
+	}
+
+	public void gameOver() {
+
+		isRunning = false;
+		timeline.stop();
+		squares = null;
+		if (emptySquares == 0) {
+			try {
+				Main.client.sendMessage(JsonGenerator.generateRequest("iSaveMap",
+						List.of(numOfColumns * numOfRows, System.currentTimeMillis() - startTime,
+								numOfMines, Arrays.stream(minePositions).boxed().collect(Collectors.toList()))
+								.stream().map(Objects::toString).collect(Collectors.toList())).toJSONString());
+				//map size,game time, number of mines, json of map
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.gc();
 	}
 
 	protected void setupScene() throws IOException {

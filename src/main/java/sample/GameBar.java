@@ -13,10 +13,10 @@ import lombok.Getter;
 import java.io.IOException;
 
 public class GameBar {
-	private static Label mineCount = new Label();
+	private static final Label mineCount = new Label();
 	protected Label backButton;
-	private Label timer = new Label();
-	private @Getter AnchorPane anchorPane = new AnchorPane();
+	private final Label timer = new Label();
+	private @Getter final AnchorPane anchorPane = new AnchorPane();
 
 	public GameBar(int bombCount, boolean resetButton) throws IOException {
 		if (resetButton) generateResetButton();
