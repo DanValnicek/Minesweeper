@@ -14,6 +14,7 @@ import java.util.UUID;
 public class MultiplayerGame extends Game {
 	protected static UUID uuid;
 	Timeline countDown;
+	public boolean won = false;
 
 	@SneakyThrows
 	public MultiplayerGame(JSONArray minePositions, int rowCount, int columnCount, UUID uuid) throws IOException {
@@ -53,15 +54,14 @@ public class MultiplayerGame extends Game {
 		super.gameOver();
 		if (emptySquares == 0) {
 			Main.client.sendMessage(JsonGenerator.generateRequest("iReportFinishedMap", List.of(uuid.toString())).toJSONString());
-		} else {
+		} else if (!won) {
 			Main.client.sendMessage(JsonGenerator.generateRequest("iLostGame", List.of(uuid.toString())).toJSONString());
 		}
 		gridPane.setMouseTransparent(true);
-			uuid = null;
-		Main.game = null;
 	}
 
 	public void startCountDown(int duration) {
+		if (duration == 0)return;
 		long endTime = System.currentTimeMillis() + duration * 1000L;
 		countDown = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			MultiplayerGameBar.setDeathCounter((endTime - System.currentTimeMillis()) / 1000);
@@ -71,17 +71,22 @@ public class MultiplayerGame extends Game {
 	}
 
 	public void startGame() {
+		if (countDown != null) {
+			countDown.stop();
+			MultiplayerGameBar.setDeathCounter(-1);
+		}
 		gridPane.setMouseTransparent(false);
 		super.startGame();
 	}
 
 	public void eliminated(String message) {
+		gridPane.setMouseTransparent(true);
 		if (countDown != null) {
 			countDown.stop();
 		}
 		Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.g, message, 10);
 		Game.isRunning = false;
-		System.gc();
+		super.gameOver();
 	}
 
 }

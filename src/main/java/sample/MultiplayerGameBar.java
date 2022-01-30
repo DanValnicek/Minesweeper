@@ -18,7 +18,7 @@ public class MultiplayerGameBar extends GameBar {
 		super(bombCount, false);
 		backButton.setOnMouseClicked(mouseEvent -> {
 			try {
-				if (MultiplayerGame.uuid != null) {
+				if (MultiplayerGame.isRunning) {
 					Main.client.sendMessage(JsonGenerator.generateRequest("iLeaveGame",
 							List.of(MultiplayerGame.uuid.toString())).toJSONString());
 				}

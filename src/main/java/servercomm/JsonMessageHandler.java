@@ -98,6 +98,7 @@ public class JsonMessageHandler {
 				}
 				case w -> {
 					Launcher.getMenuScene().getOverlay().showMessage(n, message.get(0), 10);
+					((MultiplayerGame) Main.game).won = true;
 					Main.game.gameOver();
 				}
 				case pcc -> {
@@ -115,7 +116,6 @@ public class JsonMessageHandler {
 				}
 			}
 		}
+
 	}
-
-
 }
