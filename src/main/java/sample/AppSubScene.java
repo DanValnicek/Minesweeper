@@ -44,8 +44,8 @@ public abstract class AppSubScene {
 		if (id.equals("multiplayerGameTab")) {
 			MultiplayerGame.joinToGame();
 		} else if (id.endsWith("Tab")) {
-			if(id.startsWith("menu")){
-
+			if (id.startsWith("menu")) {
+				Launcher.newScene("/menuTab.fxml");
 			}
 			Launcher.sceneSwitch(init("/" + id + ".fxml"));
 		} else if (id.startsWith("back")) {

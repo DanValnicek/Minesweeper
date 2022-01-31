@@ -89,6 +89,14 @@ public class loginTab extends AppSubScene implements Initializable {
 
 	@FXML
 	private void login() throws InterruptedException {
+		if (Main.client.isLoggedIn()){
+			try {
+				Launcher.sceneSwitch(init("/accountTab.fxml"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
 		System.out.println(usernameField.getText());
 		System.out.println(passwordField.getText());
 		if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {

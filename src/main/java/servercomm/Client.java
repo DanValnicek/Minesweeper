@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.Getter;
 import lombok.Setter;
+import sample.JsonGenerator;
 
 import java.io.IOException;
 
@@ -57,10 +58,16 @@ public class Client {
 			channel.channel().writeAndFlush("disconnect");
 			channel.channel().disconnect();
 			group.shutdownGracefully();
+			loggedIn = false;
 		} catch (NullPointerException e) {
 			System.out.println("already disconnected");
 		}
 
+	}
+
+	public void logOut() {
+		channel.channel().writeAndFlush(JsonGenerator.generateRequest("iLogOut").toJSONString() + "\n");
+		loggedIn = false;
 	}
 
 	public void sendMessage(String message) throws InterruptedException {
