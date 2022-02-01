@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Circle?>
@@ -40,7 +41,7 @@
 		</Circle>
 		<Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#playOnClickEvent" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Späť" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
 		<Button fx:id="logOutButton" layoutX="447.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#playOnClickEvent" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Odhlásiť" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
-		<Label fx:id="usernameLabel" alignment="TOP_CENTER" layoutX="360.0" layoutY="16.0" text="Ahoj ___" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="16.0" />
+		<Label fx:id="usernameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="360.0" layoutY="16.0" prefHeight="17.0" prefWidth="120.0" text="Ahoj ___" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="16.0" />
 		<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="24.0" prefHeight="38.0" prefWidth="178.0" stylesheets="@style.css" text="Account" textAlignment="CENTER" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="24.0">
 			<font>
 				<Font size="24.0" />

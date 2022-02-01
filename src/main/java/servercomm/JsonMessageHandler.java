@@ -55,7 +55,7 @@ public class JsonMessageHandler {
 		}
 	}
 
-	public void resolveCallback() throws InterruptedException, IOException {
+	public void resolveCallback() throws InterruptedException, IOException, ConfigurationException {
 		if (gameMessageType == null) {
 			if (messageType.equals(q)) {
 				if (message.get(0).startsWith("qConnect")) {
@@ -64,7 +64,11 @@ public class JsonMessageHandler {
 					} catch (IOException | ConfigurationException ex) {
 						ex.printStackTrace();
 					}
+				} else if (message.get(0).startsWith("qReturnGameHistory")) {
+					new TableViewHandler(jsonObject);
 				}
+
+
 			} else if (messageType.equals(i)) {
 				if (message.get(0).equals("ping")) {
 					Main.client.sendMessage("pong");
