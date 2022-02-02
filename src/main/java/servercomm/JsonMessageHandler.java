@@ -64,10 +64,9 @@ public class JsonMessageHandler {
 					} catch (IOException | ConfigurationException ex) {
 						ex.printStackTrace();
 					}
-				} else if (message.get(0).startsWith("qReturnGameHistory")) {
-					new TableViewHandler(jsonObject);
+				} else if (message.get(0).contains("size")) {
+					Launcher.setTableView(new TableViewHandler((JSONObject) jsonObject.get("message"), TableViewHandler.TableType.gameHistory).getDataTableView());
 				}
-
 
 			} else if (messageType.equals(i)) {
 				if (message.get(0).equals("ping")) {

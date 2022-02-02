@@ -94,6 +94,7 @@
 						<TableColumn fx:id="mineCountColumn" prefWidth="106.0" text="Počet mín" />
 						<TableColumn fx:id="mapSizeColumn" prefWidth="106.0" text="Veľkosť mapy" />
 						<TableColumn fx:id="durationColumn" prefWidth="106.0" text="Čas" />
+
 					</columns>
 				</TableView>
 			</children>

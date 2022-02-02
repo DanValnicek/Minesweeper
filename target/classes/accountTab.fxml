@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.Light.Distant?>
 
-<AnchorPane centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.accountTabController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/null" fx:controller="sample.accountTabController">
 	<!--   <columnConstraints>-->
 	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
 	<!--   </columnConstraints>-->
@@ -102,6 +96,7 @@
 						<TableColumn fx:id="mineCountColumn" prefWidth="106.0" text="Počet mín" />
 						<TableColumn fx:id="mapSizeColumn" prefWidth="106.0" text="Veľkosť mapy" />
 						<TableColumn fx:id="durationColumn" prefWidth="106.0" text="Čas" />
+
 					</columns>
 				</TableView>
 			</children>

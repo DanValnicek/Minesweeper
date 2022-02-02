@@ -2,14 +2,17 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 
 public class Launcher {
 	private static Stage firstStage;
 	private static SceneWithOverlay menuScene;
-
+	private @Getter @Setter static TableView tableView;
 
 	public static SceneWithOverlay getMenuScene() {
 		return menuScene;
