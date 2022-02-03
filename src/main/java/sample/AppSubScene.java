@@ -30,7 +30,7 @@ public abstract class AppSubScene {
 		Platform.runLater(rotateTransition::play);
 	}
 
-	protected static SubScene init(String fxml) throws IOException {
+	public static SubScene init(String fxml) throws IOException {
 		scene = new SubScene(FXMLLoader.load(Objects.requireNonNull(getResource(fxml))), 525, 269);
 		scene.setViewOrder(1);
 		rotateBackground();

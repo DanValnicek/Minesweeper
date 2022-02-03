@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+import static sample.AppSubScene.init;
 import static servercomm.MessageTypes.*;
 
 public class JsonMessageHandler {
@@ -66,6 +67,8 @@ public class JsonMessageHandler {
 					}
 				} else if (message.get(0).contains("size")) {
 					Launcher.setTableView(new TableViewHandler((JSONObject) jsonObject.get("message"), TableViewHandler.TableType.gameHistory).getDataTableView());
+					System.out.println(Launcher.getTableView().getColumns());
+//					Launcher.sceneSwitch(init("/accountTab.fxml"));
 				}
 
 			} else if (messageType.equals(i)) {

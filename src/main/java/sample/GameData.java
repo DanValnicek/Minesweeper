@@ -3,16 +3,30 @@ package sample;
 import lombok.Getter;
 import lombok.Setter;
 
-public class GameData {
-	private @Getter @Setter Integer size;
-	private @Getter @Setter Integer mineCount;
-	private @Getter @Setter Long duration;
-	private @Getter @Setter Double difficulty;
+import java.util.concurrent.TimeUnit;
 
-	public GameData(Integer size, Integer mineCount, Long duration) {
+public class GameData {
+	private @Getter
+	@Setter
+	Long size;
+	private @Getter
+	@Setter
+	Long mineCount;
+	private @Getter
+	@Setter
+	String duration;
+	private @Getter
+	@Setter
+	Double difficulty;
+
+	public GameData(Long size, Long mineCount, Long duration) {
 		this.size = size;
 		this.mineCount = mineCount;
-		this.duration = duration;
-		this.difficulty = Double.valueOf(mineCount) / size * 100;
+		this.difficulty = Double.valueOf(mineCount) / Double.valueOf(size) * 100;
+		this.duration = String.format("%d min, %d sec",
+				TimeUnit.MILLISECONDS.toMinutes(duration),
+				TimeUnit.MILLISECONDS.toSeconds(duration) -
+						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+		);
 	}
 }

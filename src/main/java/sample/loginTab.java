@@ -42,11 +42,11 @@ public class loginTab extends AppSubScene implements Initializable {
 			Main.saveConfig();
 			Main.client.setLoggedIn(true);
 			Platform.runLater(() -> {
-				try {
-					Launcher.sceneSwitch(init("/accountTab.fxml"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Launcher.sceneSwitch(init("/accountTab.fxml"));
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			});
 		} else {
 			Launcher.getMenuScene().getOverlay().showMessage(MessageTypes.e, "Nesprávne meno alebo heslo!", 10);
@@ -89,7 +89,7 @@ public class loginTab extends AppSubScene implements Initializable {
 
 	@FXML
 	private void login() throws InterruptedException {
-		if (Main.client.isLoggedIn()){
+		if (Main.client.isLoggedIn() && Launcher.getTableView() != null) {
 			try {
 				Launcher.sceneSwitch(init("/accountTab.fxml"));
 			} catch (IOException e) {
@@ -100,9 +100,10 @@ public class loginTab extends AppSubScene implements Initializable {
 		System.out.println(usernameField.getText());
 		System.out.println(passwordField.getText());
 		if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
-			Main.client.sendMessage(JsonGenerator.generateRequest("iConnect", List.of( usernameField.getText(),passwordField.getText())).toJSONString());
+			Main.client.sendMessage(JsonGenerator.generateRequest("iConnect", List.of(usernameField.getText(), passwordField.getText())).toJSONString());
 			Main.getConfigurationHandler().getConfiguration().setProperty("username", usernameField.getText());
 			Main.getConfigurationHandler().getConfiguration().setProperty("password", passwordField.getText());
+			Main.client.sendMessage(JsonGenerator.generateRequest("iReturnGameHistory").toJSONString());
 			try {
 				Main.saveConfig();
 			} catch (ConfigurationException e) {

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.Light.Distant?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/null" fx:controller="sample.accountTabController">
 	<!--   <columnConstraints>-->
 	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
@@ -81,22 +82,22 @@
 				</Lighting>
 			</effect>
 		</Label>
-		<VBox alignment="TOP_CENTER" layoutX="47.0" layoutY="62.0" prefHeight="200.0" prefWidth="427.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="62.0">
+		<VBox fx:id="contentVbox" alignment="TOP_CENTER" layoutX="47.0" layoutY="62.0" prefHeight="200.0" prefWidth="427.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="62.0">
 			<children>
 				<Label fx:id="logOutLabel1" alignment="BASELINE_LEFT" layoutX="202.0" layoutY="27.0" onMouseClicked="#playOnClickEvent" text="Hrané hry" textFill="#970000">
 					<font>
 						<Font size="18.0" />
 					</font>
 				</Label>
-				<TableView fx:id="playersGamesTable" prefHeight="200.0" prefWidth="415.0">
-					<columns>
-						<TableColumn fx:id="difficultyColumn" prefWidth="106.0" text="Obtiažnosť %" />
-						<TableColumn fx:id="mineCountColumn" prefWidth="106.0" text="Počet mín" />
-						<TableColumn fx:id="mapSizeColumn" prefWidth="106.0" text="Veľkosť mapy" />
-						<TableColumn fx:id="durationColumn" prefWidth="106.0" text="Čas" />
+<!--				<TableView fx:id="playersGamesTable" prefHeight="200.0" prefWidth="415.0">-->
+<!--					<columns>-->
+<!--						<TableColumn fx:id="difficultyColumn" prefWidth="106.0" text="Obtiažnosť %" />-->
+<!--						<TableColumn fx:id="mineCountColumn" prefWidth="106.0" text="Počet mín" />-->
+<!--						<TableColumn fx:id="mapSizeColumn" prefWidth="106.0" text="Veľkosť mapy" />-->
+<!--						<TableColumn fx:id="durationColumn" prefWidth="106.0" text="Čas" />-->
 
-					</columns>
-				</TableView>
+<!--					</columns>-->
+<!--				</TableView>-->
 			</children>
 		</VBox>
 	</children>
