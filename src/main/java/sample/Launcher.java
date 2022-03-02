@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +26,13 @@ public class Launcher {
 	public static void start(Stage primaryStage, SceneWithOverlay sceneWithOverlay) {
 		firstStage = primaryStage;
 		menuScene = sceneWithOverlay;
+		primaryStage.getIcons().add(new Image("/jebaited.png"));
 		sceneWithOverlay.getRootScene().getStylesheets().add("/style.css");
 		primaryStage.setScene(sceneWithOverlay.getRootScene());
 		primaryStage.sizeToScene();
 		primaryStage.show();
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Minesweeper");
+		primaryStage.setTitle("Míny");
 		primaryStage.setOnCloseRequest(windowEvent -> {
 			Main.client.disconnect();
 			System.out.println("Shutting down");
@@ -49,7 +51,6 @@ public class Launcher {
 
 	public static void sceneSwitch(Node subScene) throws IOException {
 		menuScene.setSubScene(subScene);
-		menuScene.displayMessage("idk", 5);
 	}
 
 	public static void sceneSwitch(Node subScene, boolean resizable, double minWidth, double minHeight, boolean resize) {

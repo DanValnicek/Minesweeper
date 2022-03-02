@@ -20,7 +20,7 @@ public class GameBar {
 
 	public GameBar(int bombCount, boolean resetButton) throws IOException {
 		if (resetButton) generateResetButton();
-		backButton = new Label("Back");
+		backButton = new Label("Späť");
 		backButton.setFont(Font.font("Impact", 15));
 		backButton.setTextFill(Color.RED);
 		backButton.setOnMouseClicked(mouseEvent -> {

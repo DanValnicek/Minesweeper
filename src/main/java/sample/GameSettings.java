@@ -53,16 +53,16 @@ public class GameSettings extends AppSubScene implements Initializable {
 		ToggleButton selectedButton = (ToggleButton) size.getSelectedToggle();
 		switch (selectedButton.getId()) {
 			case "smallSize" -> {
-				width.getValueFactory().setValue(30);
-				height.getValueFactory().setValue(30);
+				width.getValueFactory().setValue(10);
+				height.getValueFactory().setValue(10);
 			}
 			case "mediumSize" -> {
-				width.getValueFactory().setValue(50);
-				height.getValueFactory().setValue(50);
+				width.getValueFactory().setValue(20);
+				height.getValueFactory().setValue(20);
 			}
 			case "bigSize" -> {
-				width.getValueFactory().setValue(70);
-				height.getValueFactory().setValue(70);
+				width.getValueFactory().setValue(30);
+				height.getValueFactory().setValue(30);
 			}
 		}
 		selectDifficulty();

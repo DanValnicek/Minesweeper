@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.effect.Light.Distant?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/null" fx:controller="sample.accountTabController">
+
+<AnchorPane centerShape="false" maxHeight="269.0" maxWidth="525.0" minHeight="269.0" minWidth="525.0" prefHeight="269.0" prefWidth="525.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.accountTabController">
 	<!--   <columnConstraints>-->
 	<!--      <ColumnConstraints maxWidth="400.0" minWidth="0.0" prefWidth="262.0" />-->
 	<!--   </columnConstraints>-->
@@ -43,7 +48,7 @@
 		<Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#playOnClickEvent" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Späť" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0" />
 		<Button fx:id="logOutButton" layoutX="447.0" layoutY="10.0" mnemonicParsing="false" onKeyPressed="#playOnClickEvent" onMouseClicked="#playOnClickEvent" prefHeight="25.0" prefWidth="64.0" text="Odhlásiť" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
 		<Label fx:id="usernameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="360.0" layoutY="16.0" prefHeight="17.0" prefWidth="120.0" text="Ahoj ___" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="16.0" />
-		<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="24.0" prefHeight="38.0" prefWidth="178.0" stylesheets="@style.css" text="Account" textAlignment="CENTER" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="24.0">
+		<Label id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="24.0" prefHeight="38.0" prefWidth="178.0" stylesheets="@style.css" text="Účet" textAlignment="CENTER" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="24.0">
 			<font>
 				<Font size="24.0" />
 			</font>
