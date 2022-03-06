@@ -1,10 +1,23 @@
 package sample;
 
+import javafx.scene.control.Control;
+import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 
 public class Menu extends AppSubScene {
 	public static void init() throws IOException {
 		init("/menuTab.fxml");
+	}
+
+	@Override
+	public void playOnClickEvent(MouseEvent event) throws IOException, InterruptedException {
+		String id = ((Control) event.getSource()).getId();
+		if (id.equals("leaderboardTab")) {
+			Main.client.sendMessage(JsonGenerator.generateRequest("qReturnLeaderboard").toJSONString());
+			return;
+		}
+		super.playOnClickEvent(event);
 	}
 //	@FXML
 //	public void playOnClickEvent(MouseEvent event) throws IOException {

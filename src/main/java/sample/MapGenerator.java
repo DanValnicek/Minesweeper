@@ -6,7 +6,6 @@ import java.util.Random;
 public class MapGenerator {
 
 	public static int[] randMinesGen(int cells, int numOfMines, int forbidden, int rowWidth) {
-		System.out.println("forbidden:"+forbidden);
 		Random random = new Random();
 		int[] mines = new int[numOfMines];
 		loop:

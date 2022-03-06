@@ -29,4 +29,5 @@ public class GameData {
 						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
 		);
 	}
+
 }

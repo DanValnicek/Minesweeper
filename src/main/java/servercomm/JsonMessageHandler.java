@@ -66,9 +66,25 @@ public class JsonMessageHandler {
 						ex.printStackTrace();
 					}
 				} else if (message.get(0).contains("size")) {
-					Launcher.setTableView(new TableViewHandler((JSONObject) jsonObject.get("message"), TableViewHandler.TableType.gameHistory).getDataTableView());
+					Launcher.setTableView(new TableViewHandler((JSONObject) jsonObject.get("message")).getDataTableView());
 					System.out.println(Launcher.getTableView().getColumns());
-//					Launcher.sceneSwitch(init("/accountTab.fxml"));
+					Platform.runLater(()->{
+						try {
+							Launcher.sceneSwitch(init("/accountTab.fxml"));
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					});
+				} else if (message.get(0).contains("rank")) {
+					Launcher.setTableView(new TableViewHandler((JSONObject) jsonObject.get("message")).getPlayerDataTableView());
+					System.out.println(Launcher.getTableView().getColumns());
+					Platform.runLater(()->{
+						try {
+							Launcher.sceneSwitch(init("/leaderboardTab.fxml"));
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					});
 				}
 
 			} else if (messageType.equals(i)) {
